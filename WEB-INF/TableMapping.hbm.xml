@@ -1,0 +1,72 @@
+<hibernate-mapping>
+  <class name="com.zipidat.model.UserObject" table="Users">
+	  <id name="id" type="int" column="UserID" >
+	   	<generator class="increment"/>
+	  </id>
+
+	  <property name="userName" type="string">
+		 <column name="UserName" />
+	  </property>
+	  <property name="userPwd" type="string">
+		<column name="UserPwd"/>
+	  </property>
+	  
+	  <property name="online" type="bool">
+	  	<column name="UserOnline"></column>
+	  </property>
+   </class>
+   
+   
+   <class name="com.zipidat.model.MatchObject" table="Matches">
+   	<id name="id" type="int" column="MatchID">
+   		<generator class="increment"></generator>
+   	</id>
+	<set name="matchUsers" table="Users_Matches" cascade="all">
+		<key column="MatchID"></key>
+		<many-to-many column="UserID" class="com.zipidat.model.UserObject"></many-to-many>
+	</set>   	
+	<property name="userTurn" type="int">
+		<column name="MatchUserTurn"></column>
+	</property>
+	<property name="currentSpelling" type="string">
+		<column name="MatchCurrentSpelling"></column>
+	</property>
+	
+	<property name="isActive" type="bool">
+		<column name="isActive"></column>
+	</property>
+	
+   </class>
+   
+   <class name="com.zipidat.model.GameInfoObject" table="GameInfos">
+   	<id name="id" type="int" column="GameInfoID" >
+	   <generator class="increment"/>
+	</id>
+	<property name="letter" type="string">
+		<column name="GameInfoLetter"></column>
+	</property>
+	
+	<many-to-one name="matchID" class="com.zipidat.model.MatchObject" column="GameInfos_Matches" not-null="true" cascade="all" unique="true">
+	</many-to-one>
+	
+	<many-to-one name="userID" class="com.zipidat.model.UserObject" column="GameInfos_Users" not-null="true" cascade="all" unique="true">
+	</many-to-one>
+   </class>
+   
+   <class name="com.zipidat.model.ColorObject" table="ColorUsers">
+   		<id name="id" type="int" column="ColorUserID" >
+	  		 <generator class="increment"/>
+		</id>
+		
+		<property name="colorName" type="string">
+			<column name="ColorUserName"></column>
+		</property>
+		
+		<many-to-one name="userID" class="com.zipidat.model.UserObject" column="ColorUsers_Users" not-null="true" cascade="all" unique="true">
+		</many-to-one>
+		
+		<many-to-one name="matchID" class="com.zipidat.model.MatchObject" column="ColorUsers_Matches" not-null="true" cascade="all" unique="true">
+		</many-to-one>
+   </class>
+
+</hibernate-mapping>

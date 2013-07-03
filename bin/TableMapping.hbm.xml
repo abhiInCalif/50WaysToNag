@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.gratiasago.model.EpisodeModel" table="Users">
+		<id name="id" type="int" column="EpisodeID" >
+			<generator class="increment"/>
+		</id>
+
+		<property name="title" type="string" not-null="true">
+			<column name="Title" />
+		</property>
+		<property name="episodeNumber" type="string" not-null="true">
+			<column name="EpisodeNumber"/>
+		</property>
+		<property name="publishToYoutube" type="boolean" not-null="true">
+			<column name="EpisodeYoutubePublish"></column>
+		</property>
+		<property name="airDate" type="String" not-null="true">
+			<column name="EpisodeAirDate"></column>
+		</property>
+		<property name="episodeStatus" type="String" not-null="true">
+			<column name="EpisodeStatus"></column>
+		</property>
+		<property name="episodeLength" type="String" not-null="true">
+			<column name="EpisodeLength"></column>
+		</property>
+		<property name="episodeStyle" type="String" not-null="true">
+			<column name="EpisodeStyle"></column>
+		</property>
+		<property name="sizeCap" type="int" not-null="true">
+			<column name="EpisodeSizeCap"></column>
+		</property>
+		<property name="whiteboard" type="string" not-null="true">
+			<column name="EpisodeWhiteboard"></column>
+		</property>
+		
+		<list name="guestTeachers" table="EpisodeGuestTeachers" inverse="false"
+			cascade="all">
+			<key column="teacher_id" />
+			<list-index column="teacher_id" />
+			<one-to-many class="com.gratiasago.model.UserModel" />
+		</list>
+		
+		<list name="questions" table="EpisodeQuestions" inverse="false"
+			cascade="all">
+			<key column="question_id" />
+			<list-index column="question_id" />
+			<one-to-many class="com.gratiasago.model.QuestionModel" />
+		</list>
+		
+		<list name="files" table="EpisodeFiles" inverse="false"
+			cascade="all">
+			<key column="file_id" />
+			<list-index column="file_id" />
+			<one-to-many class="com.gratiasago.model.MediaModel" />
+		</list>
+		
+	</class>
+	
+	
+	
+	
+	
+	<class name="com.gratiasago.model.UserModel" table="Users">
+		<id name="id" type="int" column="UserID">
+			<generator class="increment"/>
+		</id>
+		
+		<list name="created" table="UserSessionsCreated" cascade="all" inverse="false">
+			<key column="session_id"></key>
+			<list-index column="session_id"></list-index>
+			<one-to-many class="com.gratiasago.model.SessionModel"></many-to-many>
+		</list>
+		
+		<property name="username" type="string">
+			<column name="Username"></column>
+		</property>
+		<property name="password" type="string">
+			<column name="Password"></column>
+		</property>
+		<property name="linkedinId" type="string">
+			<column name="LinkedInID"></column>
+		</property>
+		
+		<list name="invited" table="UserSessionsInvited" cascade="all" inverse="false">
+			<key column="invited_id"></key>
+			<list-index column="invited_id"></list-index>
+			<one-to-many class="com.gratiasago.model.SessionModel"></many-to-many>
+		</list>
+		
+		<one-to-one name="mProfile" class="com.gratiasago.model.ProfileModel" cascade="all"></one-to-one>
+		
+	</class>
+	
+	
+	
+	
+
+	<class name="com.gratiasago.model.SessionModel" table="Sessions">
+		<id name="id" type="int" column="SessionID" >
+			<generator class="increment"/>
+		</id>
+
+		<property name="title" type="string">
+			<column name="Title"></column>
+		</property>
+		<property name="created" type="String">
+			<column name="Created"></column>
+		</property>
+		<property name="description" type="string">
+			<column name="Description"></column>
+		</property>
+		<property name="size" type="int">
+			<column name="Size"></column>
+		</property>
+		<property name="public_name" type="string">
+			<column name="PublicName"></column>
+		</property>
+		
+		<one-to-one name="teacher" class="com.gratiasago.model.UserModel" cascade="all"></one-to-one>
+		<one-to-one name="school" class="com.gratiasago.model.SchoolModel" cascade="all"></one-to-one>
+		
+		<list name="guestTeachers" table="SessionGuestTeachers" cascade="all" inverse="false">
+			<key column="UserID"></key>
+			<list-index column="guestTeacher_id"></list-index>
+			<one-to-many class="com.gratiasago.model.UserModel"></many-to-many>
+		</list>
+		
+		<list name="enrolledStudents" table="SessionEnrolledStudents" cascade="all" inverse="false">
+			<key column="UserID"></key>
+			<list-index column="enrolledStudent_id"></list-index>
+			<one-to-many class="com.gratiasago.model.UserModel"></many-to-many>
+		</list>
+		
+		<list name="episodes" table="SessionEpisodes" cascade="all" inverse="false">
+			<key column="EpisodeID"></key>
+			<list-index column="episode_id"></list-index>
+			<one-to-many class="com.gratiasago.model.EpisodeModel"></many-to-many>
+		</list>
+		
+	</class>
+	
+	
+	
+
+	<class name="com.zipidat.model.MediaModel" table="Media">
+		<id name="id" type="int" column="MediaID" >
+			<generator class="increment"/>
+		</id>
+		
+		<property name="title" type="string">
+			<column name="Title"></column>
+		</property>
+		<property name="filename" type="string">
+			<column name="Filename"></column>
+		</property>
+		<property name="link" type="string">
+			<column name="Link"></column>
+		</property>
+		<property name="public_name" type="string">
+			<column name="PublicName"></column>
+		</property>
+		<property name="thumbnail" type="string">
+			<column name="Thumbnail"></column>
+		</property>
+	</class>
+	
+	<class name="com.zipidat.model.QuestionModel" table="Questions">
+		<id name="id" type="int" column="QuestionID" >
+			<generator class="increment"/>
+		</id>
+		
+		<property name="question" type="string">
+			<column name="Question"></column>
+		</property>
+		<property name="details" type="string">
+			<column name="Details"></column>
+		</property>
+		<property name="numberOfEndorsements" type="int">
+			<column name="NumberOfEndorsements"></column>
+		</property>
+		<property name="priorityNumber" type="int">
+			<column name="Priority"></column>
+		</property>
+		
+		<one-to-one name="askingUser" class="com.gratiasago.model.UserModel" cascade="all"></one-to-one>
+		
+		<list name="responses" table="QuestionResponses" cascade="all" inverse="false">
+			<key column="ResponseID"></key>
+			<list-index column="response_id"></list-index>
+			<one-to-many class="com.gratiasago.model.ResponseModel"></many-to-many>
+		</list>
+		
+	</class>
+	
+	
+	
+	
+	 
+	<class name="com.gratiasago.model.ResponseModel" table="Responses">
+		<id name="id" type="int" column="ResponseID" >
+			<generator class="increment"/>
+		</id>
+				
+		<one-to-one name="respondingUser" class="com.gratiasago.model.UserModel" cascade="all"></one-to-one>
+		
+		<property name="isStudent" type="boolean">
+			<column name="IsStudent"></column>
+		</property>
+		<property name="answer" type="string">
+			<column name="Answer"></column>
+		</property>
+		<property name="endorsementsOfAnswer" type="int">
+			<column name="Endorsements"></column>
+		</property>
+				
+	</class>
+	
+	
+	
+	
+	 
+	<class name="com.gratiasago.model.SchoolModel" table="Schools">
+		<id name="id" type="int" column="SchoolID">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="name" type="string">
+			<column name="SchoolName"></column>
+		</property>
+		<property name="url" type="string">
+			<column name="SchoolUrl"></column>
+		</property>
+		
+	</class>
+	
+	<class name="com.gratiasago.model.ProfileModel" table="Profiles">
+		<id name="id" type="int" column="ProfileID">
+			<generator class="increment"></generator>
+		</id>
+		
+		<one-to-one name="user" class="com.gratiasago.model.UserModel" cascade="all"></one-to-one>
+		
+		<property name="url" type="string">
+			<column name="SchoolUrl"></column>
+		</property>
+		
+	</class>
+	
+	
+</hibernate-mapping>
