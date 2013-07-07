@@ -29,7 +29,7 @@
 	
 	
 	
-	<class name="com.gratiasago.model.UserModel" table="Users">
+	<class name="com.bday.model.UserModel" table="Users">
 		<id name="id" type="int" column="UserID">
 			<generator class="increment"/>
 		</id>
@@ -84,28 +84,6 @@
 		
 		<one-to-one name="assignee" class="com.bday.model.UserModel" cascade="all"></one-to-one>
 		
-	</class>
-	
-	
-	
-
-	<class name="com.gratiasago.model.MediaModel" table="Media">
-		<id name="id" type="int" column="MediaID" >
-			<generator class="increment"/>
-		</id>
-		
-		<property name="title" type="string">
-			<column name="Title"></column>
-		</property>
-		<property name="filename" type="string">
-			<column name="Filename"></column>
-		</property>
-		<property name="link" type="string">
-			<column name="Link"></column>
-		</property>
-		<property name="thumbnail" type="string">
-			<column name="Thumbnail"></column>
-		</property>
 	</class>
 	
 	<class name="com.bday.model.InviteModel" table="Invitations">

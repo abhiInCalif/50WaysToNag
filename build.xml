@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
-<project name="GratiasAgo" default="war">
+<project name="bday" default="war">
 	<path id="compile.classpath">
-		<fileset dir="../../tomcat/lib">
+		<fileset dir="../Zipidat/tomcat/lib">
 			<include name="*.jar" />
 		</fileset>
 		<fileset dir="lib">
@@ -33,7 +33,7 @@
 		<copy todir="build/WEB-INF/lib">
 			<fileset dir="lib" />
 		</copy>
-		<war destfile="dist/GratiasAgo.war" webxml="WEB-INF/web.xml">
+		<war destfile="dist/Bday.war" webxml="WEB-INF/web.xml">
 			<fileset dir="build" />
 			<classes dir="build/WEB-INF/classes" />
 			<webinf dir="WEB-INF">

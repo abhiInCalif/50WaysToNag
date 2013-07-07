@@ -59,13 +59,13 @@ public class TaskModel {
 	/**
 	 * @return the isCompleted
 	 */
-	public boolean isCompleted() {
+	public boolean getisCompleted() {
 		return isCompleted;
 	}
 	/**
 	 * @param isCompleted the isCompleted to set
 	 */
-	public void setCompleted(boolean isCompleted) {
+	public void setisCompleted(boolean isCompleted) {
 		this.isCompleted = isCompleted;
 	}
 	/**

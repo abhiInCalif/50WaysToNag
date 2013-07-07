@@ -1,15 +1,21 @@
 package com.bday.service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.bday.utils.*;
 import com.bday.view.AuthenticationView;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/login")
@@ -21,11 +27,13 @@ public class AuthenticationService
 	* */
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String create(@RequestParam(Constants.ID_NAME) String username, 
-								@RequestParam(Constants.ID_PASSWORD) String password, Model model)
+	public String create(@RequestBody String request, Model model)
 	{
 		/* Redirect to the view that will handle the actual processing of the given
 			information */
+		JsonObject jRequest = Constants.parse(request);
+		String username = jRequest.get(Constants.ID_NAME).getAsString();
+		String password = jRequest.get(Constants.ID_PASSWORD).getAsString();
 		AuthenticationView.create_user(username, password, model);
 		return "JSONView";
 	}
@@ -39,12 +47,13 @@ public class AuthenticationService
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public String changePassword(@RequestParam(Constants.ID_NAME) String username,
-											@RequestParam(Constants.ID_PASSWORD) String password,
-											@RequestParam(Constants.ID_NEW_PASSWORD) String new_password,
-											@RequestParam(Constants.TOKEN) int token,
-											HttpSession session, Model model)
+	public String changePassword(@RequestBody String request, HttpSession session, Model model)
 	{
+		JsonObject jRequest = Constants.parse(request);
+		String username = jRequest.get(Constants.ID_NAME).getAsString();
+		String password = jRequest.get(Constants.ID_PASSWORD).getAsString();
+		String new_password = jRequest.get(Constants.ID_NEW_PASSWORD).getAsString();
+		int token = jRequest.get(Constants.TOKEN).getAsInt();
 		AuthenticationView.update_user(username, password, new_password, token, session, model);
 		return "JSONView";
 	}

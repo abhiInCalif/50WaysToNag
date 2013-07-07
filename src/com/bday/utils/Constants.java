@@ -3,6 +3,8 @@ package com.bday.utils;
 import org.springframework.ui.Model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class Constants 
 {
@@ -11,6 +13,7 @@ public class Constants
 	public static final String ID_PASSWORD = "password";
 	public static final String ID_NEW_PASSWORD = "new_password";
 	public static final String ID_SECOND_PASSWORD = "second_password";
+	private static final JsonParser json = new JsonParser();
 	
 	
 	// XOR code for the sessions
@@ -27,5 +30,10 @@ public class Constants
 		m.addAttribute("json", json);
 	}
 	
+	// public utility parse JSON function
+	public static JsonObject parse(String string)
+	{
+		return (JsonObject) json.parse(string);
+	}
 	
 }

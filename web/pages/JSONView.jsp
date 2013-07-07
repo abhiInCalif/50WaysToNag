@@ -1,1 +1,1 @@
-${callback}(${json})
+${json}
