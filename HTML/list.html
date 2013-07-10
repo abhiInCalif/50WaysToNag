@@ -15,9 +15,8 @@
   <script src="js/base.js"></script>
   <script src="js/ListController.js"></script>
   <script src="js/FamilyController.js"></script>
-
-
 </head>
+
 <body ng-controller="ListController">
   <!-- Signup Page-->
   <div data-role="page" data-theme="c" id="list-user">
@@ -28,18 +27,21 @@
 
     <div data-role="content">
       <!-- won't work for now because of angular-mobile compatibility. need to add | filter:searchTasks  -->
-      <!--<input name="search" id="search-basic" ng-model="searchTasks" /> -->
       <fieldset data-role="controlgroup">
-        <label ng-repeat="task in tasks | orderBy: 'title'">
-          <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}}
-        </label>
+        <ul data-filter="true" data-role="listview">
+          <label ng-repeat="task in tasks | orderBy: 'title' | filter:searchTasks">
+            <li>
+            <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}}
+            </li>
+          </label>
+        </ul>
       </fieldset>
     </div>
 
     <div data-role="footer" data-theme="a" data-position="fixed">
       <div data-role="navbar" data-iconpos="top">
         <ul>
-          <li><a href="#hihi">User Tasks</a></li>
+          <li><a href="#">User Tasks</a></li>
           <li><a href="#">Family Tasks</a></li>
           <li><a href="#" data-icon="plus">Add Task</a></li>
         </ul>
