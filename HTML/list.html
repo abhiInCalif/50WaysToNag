@@ -3,45 +3,45 @@
 
 <html lang="en" ng-app="bday">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Tasks - User</title>
-	<meta name="generator" content="TextMate http://macromates.com/">
-	<meta name="author" content="Abhinav  Khanna">
-	<!-- Date: 2013-07-06 -->
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
-	<script src="lib/angular.js"></script>
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
-	<script src="js/base.js"></script>
-	<script src="js/ListController.js"></script>
-	
-	
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Tasks - User</title>
+  <meta name="generator" content="TextMate http://macromates.com/">
+  <meta name="author" content="Abhinav  Khanna">
+  <!-- Date: 2013-07-06 -->
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+  <script src="lib/angular.js"></script>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+  <script src="js/base.js"></script>
+  <script src="js/ListController.js"></script>
+
+
 </head>
 <body ng-controller="ListController">
-	<!-- Signup Page-->
-	<div data-role="page" data-theme="c" id="list-user">
+  <!-- Signup Page-->
+  <div data-role="page" data-theme="c" id="list-user">
 
-		<div data-role="header" data-theme="a">
-			<h1>Tasks - User</h1>
-		</div><!-- /header -->
+    <div data-role="header" data-theme="a">
+      <h1>Tasks - User</h1>
+    </div><!-- /header -->
 
-	  <div data-role="content">
-		<fieldset data-role="controlgroup">
-			<label ng-repeat="task in tasks">
-				<input type="checkbox" name="task-id" /> Task #1
-			</label>
-		</fieldset>
-	  </div>
+    <div data-role="content">
+    <fieldset data-role="controlgroup">
+      <label ng-repeat="task in tasks">
+        <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}}
+      </label>
+    </fieldset>
+    </div>
 
-		<div data-role="footer" data-theme="a" data-position="fixed">
-			<div data-role="navbar" data-iconpos="top">
-				<ul>
-					<li><a href="#">User Tasks</a></li>
-					<li><a href="#">Family Tasks</a></li>
-					<li><a href="#" data-icon="plus">Add Task</a></li>
-				</ul>
-			</div><!-- /navbar -->	
-		</div><!-- /footer -->
-	</div><!-- /page -->
+    <div data-role="footer" data-theme="a" data-position="fixed">
+      <div data-role="navbar" data-iconpos="top">
+        <ul>
+          <li><a href="#">User Tasks</a></li>
+          <li><a href="#">Family Tasks</a></li>
+          <li><a href="#" data-icon="plus">Add Task</a></li>
+        </ul>
+      </div><!-- /navbar -->
+    </div><!-- /footer -->
+  </div><!-- /page -->
 </body>
 </html>
