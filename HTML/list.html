@@ -26,17 +26,19 @@
     </div><!-- /header -->
 
     <div data-role="content">
-    <fieldset data-role="controlgroup">
-      <label ng-repeat="task in tasks">
-        <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}}
-      </label>
-    </fieldset>
+      <!-- won't work for now because of angular-mobile compatibility. need to add | filter:searchTasks  -->
+      <!--<input name="search" id="search-basic" ng-model="searchTasks" /> -->
+      <fieldset data-role="controlgroup">
+        <label ng-repeat="task in tasks | orderBy: 'title'">
+          <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}}
+        </label>
+      </fieldset>
     </div>
 
     <div data-role="footer" data-theme="a" data-position="fixed">
       <div data-role="navbar" data-iconpos="top">
         <ul>
-          <li><a href="#">User Tasks</a></li>
+          <li><a href="#hihi">User Tasks</a></li>
           <li><a href="#">Family Tasks</a></li>
           <li><a href="#" data-icon="plus">Add Task</a></li>
         </ul>
