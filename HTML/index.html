@@ -4,10 +4,7 @@
   <title>Nag Task List</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
-  <script src="lib/angular.js"></script>
-  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
-  <script src="https://rawgithub.com/opitzconsulting/jquery-mobile-angular-adapter/master/compiled/jquery-mobile-angular-adapter-standalone.js" type="text/javascript"></script>
+  <script src="lib/query-mobile-angular-adapter-standalone.js" type="text/javascript"></script>
   <script src="js/ListController.js"></script>
   <script src="js/FamilyController.js"></script>
   <script src="js/base.js"></script>
@@ -15,13 +12,12 @@
   <script src="js/AuthenticationServices.js"></script>
 </head>
 
-<body ng-controller="AuthenticationController">
+<body>
   <!-- Signup Page-->
-  <div data-role="page" data-theme="c" id="signup">
+  <div ng-controller="AuthenticationController" data-role="page" data-theme="c" id="signup">
 
     <div data-role="header" data-theme="a">
-      <div ng-view></div>
-      <a href="/temp" class="thumb">CLICK ME</a>
+      <a href="/list" class="thumb">List(for debug)</a>
       <h1>50 Ways to Nag!</h1>
     </div><!-- /header -->
 
