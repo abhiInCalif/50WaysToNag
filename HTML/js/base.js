@@ -1,11 +1,7 @@
-var app = angular.module("bday", []);
-
-/*
-angular.module('bday', []).
+var app = angular.module('bday', []).
   config(['$routeProvider', function($routeProvider) {
   $routeProvider.
-      when('/list', {templateUrl: 'list.html',   controller: ListController}).
-      when('/auth', {templateUrl: 'auth.html', controller: ListController}).
-      otherwise({redirectTo: '/list'});
+      when('/temp', {templateUrl: 'temp.html'}).
+      when('/auth', {templateUrl: 'auth.html'}).
+      otherwise({redirectTo: '/index.html'});
 }]);
-*/
