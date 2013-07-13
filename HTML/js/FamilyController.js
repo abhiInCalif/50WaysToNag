@@ -2,13 +2,16 @@ function FamilyController($scope)
 {
   $scope.family_id = 1;
 
+  // TODO: we should add email and name to database as well
   $scope.users = [
   {
-    "username": "Irvin Zhan",
-    "tasks_assigned": [1, 2, 5]
+    "name": "Irvin Zhan",
+    "email": "izhan@princeton.edu",
+    "username": "izhan"
   },
   {
-    "username": "Abhinav Khanna",
-    "tasks_assigned": [3, 4]
+    "name": "Abhinav Khanna",
+    "email": "akhanna@princeton.edu",
+    "username": "akhanna"
   }];
 }

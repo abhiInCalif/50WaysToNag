@@ -11,6 +11,7 @@ var app = angular.module('bday', []).
 // assignee must be unique user_id
 // injection to controller
 app.service('sharedTaskList', function () {
+  var counter = 100;
   var taskList = [
     {
       "task_id": 1,
@@ -18,7 +19,7 @@ app.service('sharedTaskList', function () {
       "details": "detail1 detail1 detail1 detail1",
       "isCompleted": true,
       "nagStatus": 1,
-      "assignee": "uniqueuser1"
+      "assignee": "izhan@princeton.edu"
     },
     {
       "task_id": 2,
@@ -26,7 +27,7 @@ app.service('sharedTaskList', function () {
       "details": "detail2 detail2 detail2 detail2",
       "isCompleted": false,
       "nagStatus": 2,
-      "assignee": "uniqueuser1"
+      "assignee": "izhan@princeton.edu"
     },
     {
       "task_id": 3,
@@ -34,7 +35,7 @@ app.service('sharedTaskList', function () {
       "details": "detail3 detail3 detail3 detail3",
       "isCompleted": true,
       "nagStatus": 3,
-      "assignee": "uniqueuser1"
+      "assignee": "akhanna@princeton.edu"
     },
     {
       "task_id": 4,
@@ -42,7 +43,7 @@ app.service('sharedTaskList', function () {
       "details": "detail4 detail4 detail4 detail4",
       "isCompleted": false,
       "nagStatus": 4,
-      "assignee": "uniqueuser2"
+      "assignee": "izhan@princeton.edu"
     },
     {
       "task_id": 5,
@@ -50,15 +51,21 @@ app.service('sharedTaskList', function () {
       "details": "detail5 detail5 detail5 detail5",
       "isCompleted": true,
       "nagStatus": 5,
-      "assignee": "uniqueuser2"
+      "assignee": "akhanna@princeton.edu"
     }];
 
-  return {
+    return {
       getList: function () {
-          return taskList;
+        return taskList;
       },
       setList: function(list) {
-          taskList = list;
+        taskList = list;
+      },
+      incrementNewTaskId: function() {
+        counter++;
+      },
+      getNewTaskId: function() {
+        return counter;
       }
   };
 });

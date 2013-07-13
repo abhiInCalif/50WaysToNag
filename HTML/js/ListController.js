@@ -8,26 +8,55 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
   };
 
   $scope.addTask = function() {
-    $scope.tasks.push($scope.newTask)
-    sharedTaskList.setList($scope.tasks);
-    $location.path('/list');
+    console.log($scope.newTask);
+    $scope.tasks.push($scope.newTask);
+    sharedTaskList.incrementNewTaskId();
+    $scope.updateTask();
   };
+  /*
+  $scope.isChecked = function() {
+    console.log('hit');
+    var index = findEmailIndex(email);
+    if (!index)
+    {
+      console.log('win');
+      return "checked";
+    }
+    else
+    {
+      return "";
+    }
+  };*/
 
   // O(n) for now
-  function findIndex(id)
+  function findTaskIndex(id)
   {
     for (var k = 0; k < $scope.tasks.length; k++)
     {
       if ($scope.tasks[k].task_id == id)
       {
-
         return k;
       }
     }
     return false;
   }
+
+  // O(n) for now
+  function findEmailIndex(email)
+  {
+    for (var k = 0; k < $scope.tasks.length; k++)
+    {
+      if ($scope.tasks[k].email == email)
+      {
+        return k;
+      }
+    }
+    return false;
+  }
+
+  // TODO: need to know which user is currently logged on
   $scope.newTask = {
-      "task_id": 6,
+      "task_id": sharedTaskList.getNewTaskId(),
       "title": "",
       "details": "",
       "isCompleted": false,
@@ -36,6 +65,6 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
   };
   if ($routeParams.taskId)
   {
-    $scope.currentTask = $scope.tasks[findIndex($routeParams.taskId)];
+    $scope.currentTask = $scope.tasks[findTaskIndex($routeParams.taskId)];
   }
 }
