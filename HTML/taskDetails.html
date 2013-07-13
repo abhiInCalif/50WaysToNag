@@ -1,0 +1,23 @@
+<div ng-controller="ListController" data-role="page" data-theme="c" id="list-details">
+  <div data-role="header" data-theme="a">
+    <button class="thumb" ng-click="updateTask()">Save</button>
+    <h1>Task Details</h1>
+  </div><!-- /header -->
+
+  <div data-role="content">
+    <input type="text" name="name" id="basic" value="" placeholder="Name of Task" ng-model="currentTask.title"/>
+    <!-- will automatically expand though initial height is 100px -->
+    <textarea name="textarea" id="textarea" placeholder="Details" style="height: 100px" ng-model="currentTask.details">
+    </textarea>
+    <label ng-controller="FamilyController"> Assigned For:
+      <br>
+      <label ng-repeat="user in users">
+        <input type="radio" ng-model="newTask.assignee" ng-checked="isChecked(user.email)" name={{user.email}} id={{user.email}} value={{user.email}} data-type="horizontal"/>
+        <label for="radio-choice-1">{{user.name}}</label>
+      </label>
+    </label>
+  </div>
+  <div data-role="footer" data-theme="a" data-position="fixed">
+    <h2></h2>
+  </div>
+</div><!-- /page -->

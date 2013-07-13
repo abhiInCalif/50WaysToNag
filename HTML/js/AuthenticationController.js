@@ -1,7 +1,7 @@
 function AuthenticationController($scope, authService, $location)
 {
 	$scope.error = false;
-	
+
 	$scope.onClickOfRegister = function()
 	{
 		// check basic frontend validation then issue the service call.
@@ -22,7 +22,7 @@ function AuthenticationController($scope, authService, $location)
 			});
 		}
 	};
-	
+
 	$scope.onClickOfLogin = function()
 	{
 		if ($scope.login.$valid != false)
