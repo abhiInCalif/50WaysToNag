@@ -16,3 +16,6 @@
 
 # Ignore dist file
 /dist
+
+# Ignore Abhi's textmate file
+/HTML/Bday.tmproj
