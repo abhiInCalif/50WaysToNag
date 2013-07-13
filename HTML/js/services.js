@@ -59,7 +59,6 @@ app.service('sharedTaskList', function () {
 
       setList: function(list) {
         if (list) {
-          console.log('if');
           taskList = list;
         }
         // resets list

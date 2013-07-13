@@ -21,21 +21,9 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
     $scope.tasks = sharedTaskList.getList();
   };
 
-  // TODO: working on this now (irvin)
-  /*
-  $scope.isChecked = function() {
-    console.log('hit');
-    var index = findEmailIndex(email);
-    if (!index)
-    {
-      console.log('win');
-      return "checked";
-    }
-    else
-    {
-      return "";
-    }
-  };*/
+  $scope.isChecked = function(email) {
+    return email == $scope.currentTask.assignee;
+  };
 
   // O(n) for now
   function findTaskIndex(id)
@@ -43,19 +31,6 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
     for (var k = 0; k < $scope.tasks.length; k++)
     {
       if ($scope.tasks[k].task_id == id)
-      {
-        return k;
-      }
-    }
-    return false;
-  }
-
-  // O(n) for now
-  function findEmailIndex(email)
-  {
-    for (var k = 0; k < $scope.tasks.length; k++)
-    {
-      if ($scope.tasks[k].email == email)
       {
         return k;
       }
