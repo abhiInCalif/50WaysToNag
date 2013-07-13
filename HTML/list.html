@@ -12,6 +12,7 @@
         <label ng-repeat="task in tasks | orderBy: 'title' | filter:searchTasks">
           <li>
           <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}}
+          <a href="edit/{{task.task_id}}">Edit</a>
           </li>
         </label>
       </ul>
