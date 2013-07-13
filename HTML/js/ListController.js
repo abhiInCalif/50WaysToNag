@@ -8,7 +8,6 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
   };
 
   $scope.addTask = function() {
-    console.log($scope.newTask);
     $scope.tasks.push($scope.newTask);
     sharedTaskList.incrementNewTaskId();
     $scope.updateTask();
