@@ -7,6 +7,12 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
     $location.path('/list');
   };
 
+  $scope.addTask = function() {
+    $scope.tasks.push($scope.newTask)
+    sharedTaskList.setList($scope.tasks);
+    $location.path('/list');
+  };
+
   // O(n) for now
   function findIndex(id)
   {
@@ -20,5 +26,16 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
     }
     return false;
   }
-  $scope.currentTask = $scope.tasks[findIndex($routeParams.taskId)];
+  $scope.newTask = {
+      "task_id": 6,
+      "title": "",
+      "details": "",
+      "isCompleted": false,
+      "nagStatus": 5,
+      "assignee": "someuser"
+  };
+  if ($routeParams.taskId)
+  {
+    $scope.currentTask = $scope.tasks[findIndex($routeParams.taskId)];
+  }
 }

@@ -1,45 +1,29 @@
-<!DOCTYPE html>
-<html ng-app="bday">
-<head>
-  <title>Add New Task</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
-  <script src="lib/angular.js"></script>
-  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
-  <script src="js/base.js"></script>
-  <script src="js/ListController.js"></script>
-  <script src="js/FamilyController.js"></script>
-</head>
+<div ng-controller="ListController" data-role="page" data-theme="c" id="list-details">
+  <div data-role="header" data-theme="a">
+    <button class="thumb" ng-click="addTask()">Add!</button>
+    <h1>Add Task</h1>
+  </div><!-- /header -->
 
-<body ng-controller="ListController">
-  <div data-role="page" data-theme="c" id="list-details">
-
-    <div data-role="header" data-theme="a">
-      <h1>Add New Task</h1>
-    </div><!-- /header -->
-
-    <div data-role="content">
-      <input type="text" name="name" id="basic" value="" placeholder="Name of Task"/>
-      <!-- will automatically expand though initial height is 100px -->
-      <textarea name="textarea" id="textarea" placeholder="Details" style="height: 100px"></textarea>
-      <label ng-controller="FamilyController"> Assigned For:
-        <br>
-        <label ng-repeat="user in users">
-          <a href="#" data-role="button" data-inline="true">{{user.username}}</a>
-        </label>
+  <div data-role="content">
+    <input type="text" name="name" id="basic" value="" placeholder="Name of Task" ng-model="newTask.title"/>
+    <!-- will automatically expand though initial height is 100px -->
+    <textarea name="textarea" id="textarea" placeholder="Details" style="height: 100px" ng-model="newTask.details">
+    </textarea>
+    <label ng-controller="FamilyController"> Assigned For:
+      <br>
+      <label ng-repeat="user in users">
+        <a href="#" data-role="button" data-inline="true">{{user.username}}</a>
       </label>
-    </div>
+    </label>
+  </div>
 
-    <div data-role="footer" data-theme="a" data-position="fixed">
-      <div data-role="navbar" data-iconpos="top">
-        <ul>
-          <li><a href="#">User Tasks</a></li>
-          <li><a href="#">Family Tasks</a></li>
-          <li><a href="#" data-icon="plus">Add Task</a></li>
-        </ul>
-      </div><!-- /navbar -->
-    </div><!-- /footer -->
-  </div><!-- /page -->
-</body>
-</html>
+  <div data-role="footer" data-theme="a" data-position="fixed">
+    <div data-role="navbar" data-iconpos="top">
+      <ul>
+        <li><a href="#">User Tasks</a></li>
+        <li><a href="#">Family Tasks</a></li>
+        <li><a href="#" data-icon="plus">Add Task</a></li>
+      </ul>
+    </div><!-- /navbar -->
+  </div><!-- /footer -->
+</div><!-- /page -->
