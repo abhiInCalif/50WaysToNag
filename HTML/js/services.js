@@ -3,7 +3,11 @@
 // injection to controller
 app.service('sharedTaskList', function () {
   var counter = 100;
-  var taskList = [
+
+  // data loaded from backend.  should be unfiltered, etc
+  // that way, when we change taskList, we don't have to
+  // call backend again if we ever need to reset
+  var data = [
     {
       "task_id": 1,
       "title": "AA the dishes1",
@@ -45,16 +49,29 @@ app.service('sharedTaskList', function () {
       "assignee": "akhanna@princeton.edu"
     }];
 
+  // deep copy needed
+  var taskList = angular.copy(data);
+
     return {
       getList: function () {
         return taskList;
       },
+
       setList: function(list) {
-        taskList = list;
+        if (list) {
+          console.log('if');
+          taskList = list;
+        }
+        // resets list
+        else {
+          taskList = angular.copy(data);
+        }
       },
+
       incrementNewTaskId: function() {
         counter++;
       },
+
       getNewTaskId: function() {
         return counter;
       }

@@ -12,6 +12,16 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
     sharedTaskList.incrementNewTaskId();
     $scope.updateTask();
   };
+
+  // for debugging purposes for now
+  // resets to data pulled from server
+  // will be used in production in future
+  $scope.resetAll = function() {
+    sharedTaskList.setList();
+    $scope.tasks = sharedTaskList.getList();
+  };
+
+  // TODO: working on this now (irvin)
   /*
   $scope.isChecked = function() {
     console.log('hit');
@@ -62,6 +72,7 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
       "nagStatus": 5,
       "assignee": "someuser"
   };
+
   if ($routeParams.taskId)
   {
     $scope.currentTask = $scope.tasks[findTaskIndex($routeParams.taskId)];
