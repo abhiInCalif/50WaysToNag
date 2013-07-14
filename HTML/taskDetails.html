@@ -12,8 +12,9 @@
     <label ng-controller="FamilyController"> Assigned For:
       <br>
       <label ng-repeat="user in users">
-        <input type="radio" ng-model="newTask.assignee" ng-checked="isChecked(user.email)" name={{user.email}} id={{user.email}} value={{user.email}} data-type="horizontal"/>
-        <label for="radio-choice-1">{{user.name}}</label>
+        <label>
+        <input type="radio" ng-model="$parent.$parent.currentTask.assignee" value="{{user.email}}"/>
+        {{user.name}}</label>
       </label>
     </label>
   </div>

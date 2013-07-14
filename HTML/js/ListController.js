@@ -21,10 +21,6 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
     $scope.tasks = sharedTaskList.getList();
   };
 
-  $scope.isChecked = function(email) {
-    return email == $scope.currentTask.assignee;
-  };
-
   // O(n) for now
   function findTaskIndex(id)
   {
@@ -48,6 +44,7 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
       "assignee": "someuser"
   };
 
+  // when navigating to details page
   if ($routeParams.taskId)
   {
     $scope.currentTask = $scope.tasks[findTaskIndex($routeParams.taskId)];
