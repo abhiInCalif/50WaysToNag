@@ -1,7 +1,9 @@
 <div ng-controller="ListController" data-role="page" data-theme="c" id="list-user">
   <div data-role="header" data-theme="a">
-    <a href="/list" class="thumb" data-rel="back">Back(fordebug)</a>
+    <!-- should invoke logout -->
+    <a href="/" class="thumb">Logout</a>
     <h1>Tasks - Family</h1>
+    <a href="/new" class="thumb" data-icon="plus">Add Task</a>
   </div><!-- /header -->
 
   <div data-role="content">
@@ -26,7 +28,6 @@
         <li><button ng-click="resetAll()">RESET ALL</button></li>
         <li><a href="/userList">User Tasks</a></li>
         <li><a href="/familyList">Family Tasks</a></li>
-        <li><a href="/new" data-icon="plus">Add Task</a></li>
       </ul>
     </div><!-- /navbar -->
   </div><!-- /footer -->
