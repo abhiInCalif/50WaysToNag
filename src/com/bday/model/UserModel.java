@@ -5,11 +5,38 @@ import java.util.List;
 public class UserModel 
 {
 	private int id;
-	private String username;
+	private String email;
+	private String name;
 	private String password;
-	private List<TaskModel> tasks;
-	private List<FamilyModel> families;
+	private String phoneNumber;
+	private transient List<TaskModel> tasks;
+	private transient List<FamilyModel> families;
 	private List<InviteModel> invitations;
+	
+	/**
+	 * @return the phoneNumber
+	 */
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	/**
+	 * @param phoneNumber the phoneNumber to set
+	 */
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 	/**
 	 * @return the id
 	 */
@@ -25,14 +52,14 @@ public class UserModel
 	/**
 	 * @return the username
 	 */
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 	/**
 	 * @param username the username to set
 	 */
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	/**
 	 * @return the password
@@ -85,6 +112,10 @@ public class UserModel
 	
 	public void addFamily(FamilyModel newFamily) {
 		this.families.add(newFamily);
+	}
+	
+	public void addTask(TaskModel mTask) {
+		this.tasks.add(mTask);
 	}
 	
 	

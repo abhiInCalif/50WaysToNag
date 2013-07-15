@@ -10,6 +10,7 @@ public class Constants
 {
 	// login Controller constants
 	public static final String ID_NAME = "username";
+	public static final String ID_EMAIL = "email";
 	public static final String ID_PASSWORD = "password";
 	public static final String ID_NEW_PASSWORD = "new_password";
 	public static final String ID_SECOND_PASSWORD = "second_password";
@@ -20,6 +21,10 @@ public class Constants
 	public static final int XOR_CODE =  0x0B62;
 	public static final String TOKEN = "token";
 	public static final String USER = "user";
+	public static final String NAG_STATUS = "nagStatus";
+	public static final String IS_COMPLETED = "isCompleted";
+	public static final String DESC = "details";
+	public static final String TITLE = "title";
 	
 	
 	// public utility functions
