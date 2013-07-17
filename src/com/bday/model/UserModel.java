@@ -1,5 +1,6 @@
 package com.bday.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserModel 
@@ -12,6 +13,13 @@ public class UserModel
 	private transient List<TaskModel> tasks;
 	private transient List<FamilyModel> families;
 	private List<InviteModel> invitations;
+	
+	public UserModel()
+	{
+		this.tasks = new ArrayList<TaskModel>();
+		this.families = new ArrayList<FamilyModel>();
+		this.invitations = new ArrayList<InviteModel>();
+	}
 	
 	/**
 	 * @return the phoneNumber

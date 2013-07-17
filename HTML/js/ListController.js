@@ -4,16 +4,27 @@ function ListController($scope, $location, $routeParams, sharedTaskList, familyT
 	
 	$scope.family_id = -1;
 	
-	$scope.tasksBackend = familyTasksService.get($scope.family_id, function(data)
+	$scope.getFamilyTasks = function()
 	{
-		
-	});
+		familyTasksService.get(function(data)
+		{
+			$scope.tasks = data;
+		});
+	};
 	
 	$scope.createFamily = function()
 	{
 		createFamilyService.create(function(data)
 		{
 			$scope.family_id = data;
+		});
+	};
+	
+	$scope.getUserTasks = function()
+	{
+		familyTasksService.getUserTasks(function(data)
+		{
+			$scope.tasks = data;
 		});
 	};
 
@@ -24,10 +35,9 @@ function ListController($scope, $location, $routeParams, sharedTaskList, familyT
 
   $scope.addTask = function() {
     $scope.tasks.push($scope.newTask);
-    familyTasksService.post($scope.family_id, $scope.newTask, function(data)
+    familyTasksService.post($scope.newTask, function(data)
 	 {
-			// truly we shouldn't be doing anything on success but redirecting
-			// to the list page.
+			$location.url("/list.html");
 	 });
     $scope.updateTask();
   };

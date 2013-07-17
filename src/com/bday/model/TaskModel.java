@@ -15,6 +15,11 @@ public class TaskModel {
 		this.isCompleted = isCompleted;
 		this.nagStatus = nagStatus;
 	}
+	
+	public TaskModel()
+	{
+		// empty default constructor for all other cases
+	}
 	/**
 	 * @return the id
 	 */

@@ -5,10 +5,10 @@ var listService = app.factory('familyTasksService', function ($http, $templateCa
 	return {
 		// mTask is the TaskModel object
 		// must contain (assignee_name (name), details, title, isCompleted, nagStatus)
-		post: function(family_id, mTask, callback)
+		post: function(mTask, callback)
 		{
 			$http({method: "POST", 
-					url: "/Bday/family/1",
+					url: "/Bday/family/task",
 					cache: $templateCache,
 					data: mTask}).success(function(data, status, headers, config)
 					{
@@ -22,9 +22,27 @@ var listService = app.factory('familyTasksService', function ($http, $templateCa
 					});
 		},
 		
-		get: function(family_id, callback)
+		get: function(callback)
 		{
 			$http({method: "GET",
+					url: "/Bday/family/task",
+					cache: $templateCache}).success(function(data,status,headers,config)
+					{
+						callback(data);
+					}).error(function(data, status, headers, config)
+					{
+						// some error handling
+						console.log("Network Error occured!");
+						console.log(status);
+						console.log(headers);
+					});
+		},
+		
+		// this one requires a family_id in order to know exactly which family the alternative user
+		// should be added to, since this user will not have this family to begin with.
+		addMember: function(family_id, callback)
+		{
+			$http({method: "PUT",
 					url: "/Bday/family/" + family_id,
 					cache: $templateCache}).success(function(data,status,headers,config)
 					{
@@ -38,14 +56,30 @@ var listService = app.factory('familyTasksService', function ($http, $templateCa
 					});
 		},
 		
-		addMember: function(family_id, callback)
+		getUserTasks: function(callback)
 		{
-			$http({method: "PUT",
-					url: "/Bday/family/" + family_id,
+			$http({method: "GET",
+					url: "/Bday/tasks",
 					cache: $templateCache}).success(function(data,status,headers,config)
 					{
 						callback(data);
-					}).error(function(data, status, headers, config)
+					}).error(function(data,status,headers,config)
+					{
+						// some error handling
+						console.log("Network Error occured!");
+						console.log(status);
+						console.log(headers);
+					});
+		},
+		
+		updateTaskDetails: function(task_id, callback)
+		{
+			$http({method: "PUT",
+					url: "/Bday/tasks/" + task_id,
+					cache: $templateCache}).success(function(data,status,headers,config)
+					{
+						callback(data);
+					}).error(function(data,status,headers,config)
 					{
 						// some error handling
 						console.log("Network Error occured!");

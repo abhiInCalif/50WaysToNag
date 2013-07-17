@@ -16,7 +16,7 @@
 			<many-to-many column="UserFamily_id" class="com.bday.model.UserModel" />
 		</list>
 		
-		<list name="tasks" table="FamilyTasks" inverse="true"
+		<list name="tasks" table="FamilyTasks" inverse="false"
 			cascade="all">
 			<key column="FamilyTasksID" />
 			<list-index column="familytasks_id" />

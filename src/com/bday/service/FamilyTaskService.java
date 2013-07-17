@@ -24,13 +24,13 @@ public class FamilyTaskService {
 	public String post(@RequestBody String request, @PathVariable int id, Model model)
 	{
 		JsonObject jRequest = Constants.parse(request);
-		int user_id = jRequest.get(Constants.USER).getAsInt();
+		String user_email = jRequest.get(Constants.ASSIGNEE).getAsString();
 		String title = jRequest.get(Constants.TITLE).getAsString();
 		String description = jRequest.get(Constants.DESC).getAsString();
 		boolean isCompleted = jRequest.get(Constants.IS_COMPLETED).getAsBoolean();
 		int nagStatus = jRequest.get(Constants.NAG_STATUS).getAsInt();
 		TaskModel mTask = new TaskModel(title, description, nagStatus, isCompleted);
-		FamilyView.postTask(mTask, id, user_id, model);
+		FamilyView.postTask(mTask, id, user_email, model);
 		return "JSONView";
 	}
 	

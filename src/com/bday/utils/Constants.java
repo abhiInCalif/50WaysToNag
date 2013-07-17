@@ -1,7 +1,14 @@
 package com.bday.utils;
 
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.ui.Model;
 
+import com.bday.model.TaskModel;
+import com.bday.model.UserModel;
+import com.bday.view.ViewManager;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -25,6 +32,7 @@ public class Constants
 	public static final String IS_COMPLETED = "isCompleted";
 	public static final String DESC = "details";
 	public static final String TITLE = "title";
+	public static final String ASSIGNEE = "assignee";
 	
 	
 	// public utility functions
@@ -39,6 +47,15 @@ public class Constants
 	public static JsonObject parse(String string)
 	{
 		return (JsonObject) json.parse(string);
+	}
+	
+	public static TaskModel getTaskModelFromRequest(JsonObject jRequest)
+	{
+		String title = jRequest.get(Constants.TITLE).getAsString();
+		String description = jRequest.get(Constants.DESC).getAsString();
+		boolean isCompleted = jRequest.get(Constants.IS_COMPLETED).getAsBoolean();
+		int nagStatus = jRequest.get(Constants.NAG_STATUS).getAsInt();
+		return new TaskModel(title, description, nagStatus, isCompleted);
 	}
 	
 }
