@@ -43,7 +43,7 @@ function AuthenticationController($scope, authService, $location)
 					// redirect the user, store the session object so that you have the authentication
 					// token, the token should be sent back from the server, and needs to be incorporated
 					// in every call (ensures an authenticated user....);
-					$location.url("/list.html");
+					$location.url("/familyList.html");
 				}
 			});
 		}

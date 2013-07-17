@@ -1,3 +1,9 @@
+app.factory("userSession", function(){
+  // how do you want to handle session and auth tokens?
+  // hardcoded temporarily to create family and user list pages
+  return {session: {sessionToken: null, email: "akhanna@princeton.edu" } }
+});
+
 
 // assignee must be unique user_id
 // injection to controller

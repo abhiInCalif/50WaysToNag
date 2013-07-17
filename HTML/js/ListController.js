@@ -1,10 +1,11 @@
-function ListController($scope, $location, $routeParams, sharedTaskList)
+function ListController($scope, $location, $routeParams, sharedTaskList, userSession)
 {
+  $scope.currentUser = userSession.session;
 	$scope.tasks = sharedTaskList.getList();
 
   $scope.updateTask = function() {
     sharedTaskList.setList($scope.tasks);
-    $location.path('/list');
+    $location.path('/familyList');
   };
 
   $scope.addTask = function() {
@@ -21,12 +22,8 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
     $scope.tasks = sharedTaskList.getList();
   };
 
-  $scope.isChecked = function(email) {
-    return email == $scope.currentTask.assignee;
-  };
-
   // O(n) for now
-  function findTaskIndex(id)
+  function getTaskById(id)
   {
     for (var k = 0; k < $scope.tasks.length; k++)
     {
@@ -48,8 +45,9 @@ function ListController($scope, $location, $routeParams, sharedTaskList)
       "assignee": "someuser"
   };
 
+  // when navigating to details page
   if ($routeParams.taskId)
   {
-    $scope.currentTask = $scope.tasks[findTaskIndex($routeParams.taskId)];
+    $scope.currentTask = $scope.tasks[getTaskById($routeParams.taskId)];
   }
 }
