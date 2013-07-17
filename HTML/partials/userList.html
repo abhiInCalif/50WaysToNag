@@ -9,13 +9,12 @@
   <div data-role="content">
     <!-- debugging header -->
     <h1> USER TASKS </h1>
-    <!-- won't work for now because of angular-mobile compatibility. need to add | filter:searchTasks  -->
     <fieldset data-role="controlgroup">
       <ul data-filter="true" data-role="listview">
         <label ng-repeat="task in tasks | orderBy: 'title' | filter:searchTasks">
           <li>
-          <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}} <!--for debug-->({{task.assignee.email}})
-          <a ng-href="edit/{{task.id}}">Edit</a>
+          <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}} <!--for debug-->({{task.assignee}})
+          <a href="/{{task.id}}/edit">Edit</a>
           </li>
         </label>
       </ul>
