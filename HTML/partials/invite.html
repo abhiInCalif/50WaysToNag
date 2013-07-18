@@ -1,23 +1,17 @@
 <div ng-controller="FamilyController" data-role="page" data-theme="c" id="settings">
   <div data-role="header" data-theme="a">
-    <h1>Settings</h1>
+    <h1>Invite To Family!</h1>
     <a class="thumb" data-rel="back">Back</a>
   </div><!-- /header -->
 
   <div data-role="content">
     <!-- for debug -->
-    <h1> Settings </h1>
-    <a href="/settings/invite" data-role="button">Invite To Family</a>
+    <h1> INVITE TO FAMILY </h1>
+    <form name="invite" ng-submit="">
+    <input type="text" name="username" id="invite-username" placeholder="Username" value="" ng-model="username" required>
   </div>
 
   <div data-role="footer" data-theme="a" data-position="fixed">
-    <div data-role="navbar" data-iconpos="top">
-      <ul>
-        <li><button ng-click="resetAll()">RESET ALL</button></li>
-        <li><a href="/userList">User Tasks</a></li>
-        <li><a href="/familyList">Family Tasks</a></li>
-        <li><a href="/settings">Settings</a></li>
-      </ul>
-    </div><!-- /navbar -->
+    <h2></h2>
   </div><!-- /footer -->
 </div><!-- /page -->
