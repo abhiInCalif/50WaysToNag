@@ -125,6 +125,10 @@ public class UserModel
 	public void addTask(TaskModel mTask) {
 		this.tasks.add(mTask);
 	}
+
+	public void addInvite(InviteModel mInvite) {
+		this.invitations.add(mInvite);
+	}
 	
 	
 }

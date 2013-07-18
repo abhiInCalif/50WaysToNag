@@ -44,6 +44,18 @@ public class TaskDetailsView {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public static void delete(int id, Model model) 
+	{
+		Session sess = ViewManager.getCurrentSession();
+		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
+		Transaction tr = sess.beginTransaction();
+		
+		TaskModel mTask = (TaskModel) sess.get(TaskModel.class, id);
+		
+		sess.delete(mTask);
+		tr.commit();
+	}
 	
 
 }

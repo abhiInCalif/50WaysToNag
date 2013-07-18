@@ -52,5 +52,12 @@ public class TaskDetailsService {
 		TaskDetailsView.assignTask(username, id, model);
 		return "JSONView";
 	}
+	
+	@RequestMapping(method = RequestMethod.DELETE)
+	public String deleteTask(@PathVariable int id, Model model)
+	{
+		TaskDetailsView.delete(id, model);
+		return "JSONView";
+	}
 
 }
