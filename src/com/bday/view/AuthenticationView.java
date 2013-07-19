@@ -19,18 +19,18 @@ public class AuthenticationView
 {
 	
 	// creates a new user, does not login the user after creation.
-	public static void create_user(String username, String password, Model model)
+	public static void create_user(String email, String password, Model model)
 	{
 		Session sess = ViewManager.getCurrentSession();
 		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
 		Transaction tr = sess.beginTransaction();
 		
 		// checks if the user exists in the database, if not, proceeds to create a new user
-		if(!isUserAlready(username))
+		if(!isUserAlready(email))
 		{
 			try {
 				UserModel user = new UserModel();
-				user.setUsername(username);
+				user.setEmail(email);
 				user.setPassword(password);
 				int id = (Integer) sess.save(user);
 				sess.flush();
@@ -52,13 +52,13 @@ public class AuthenticationView
 	}
 	
 	// logs in user, create a session token, and returns the encoded session token
-	public static void login_user(String username, String password, HttpSession session, Model model)
+	public static void login_user(String email, String password, HttpSession session, Model model)
 	{
 		Session sess = ViewManager.getCurrentSession();
 		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
 		
 		// check if the user / password pair exists
-		UserModel user = isValidUser(username, password);
+		UserModel user = isValidUser(email, password);
 		if(user != null)
 		{
 			// create the session token on the server, and declare the user logged in.
@@ -77,7 +77,7 @@ public class AuthenticationView
 		
 	}
 	
-	public static void update_user(String username, String password, String new_password, int token, HttpSession session, Model model)
+	public static void update_user(String email, String password, String new_password, int token, HttpSession session, Model model)
 	{
 		Session sess = ViewManager.getCurrentSession();
 		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
@@ -86,7 +86,7 @@ public class AuthenticationView
 		
 		// if valid token is passed, update the user object's user and password with new password
 		// given that the user for the given user and password exists
-		UserModel user = isValidUser(username, password);
+		UserModel user = isValidUser(email, password);
 		if(user != null)
 		{
 			int server_token = (Integer)session.getAttribute(Constants.TOKEN);
@@ -123,7 +123,7 @@ public class AuthenticationView
 		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
 		Transaction tr = sess.beginTransaction();
 		
-		List users = sess.createQuery("from UserModel as user where user.username=? and user.password=?").setString(0, username).setString(1, password).list();
+		List users = sess.createQuery("from UserModel as user where user.email=? and user.password=?").setString(0, username).setString(1, password).list();
 		if(users.size() > 0)
 			return (UserModel) users.get(0);
 		else
@@ -131,14 +131,14 @@ public class AuthenticationView
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static boolean isUserAlready(String username)
+	private static boolean isUserAlready(String email)
 	{
 		Session sess = ViewManager.getCurrentSession();
 		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
 		Transaction tr = sess.beginTransaction();
 		
 		// check if the username exists in the database
-		List users = sess.createQuery("from UserModel as user where user.username=?").setString(0, username).list();
+		List users = sess.createQuery("from UserModel as user where user.email=?").setString(0, email).list();
 		if (users.size() > 0)
 			return true;
 		else

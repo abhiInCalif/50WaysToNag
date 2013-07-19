@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 
 
+import com.bday.model.FamilyModel;
 import com.bday.model.TaskModel;
 import com.bday.model.UserModel;
 import com.bday.utils.Constants;
@@ -30,7 +31,7 @@ public class TaskView {
 		
 		// step two, use the id of the user to query for an updated
 		// userObject
-		UserModel user = (UserModel) sess.get(UserModel.class, session_user.getId());
+		UserModel user = (UserModel) sess.merge(session_user);
 		
 		// step three retrieve all the tasks from the user object
 		List<TaskModel> tasks = user.getTasks();
@@ -39,6 +40,19 @@ public class TaskView {
 		Type taskType = new TypeToken<List<TaskModel>>() {}.getType();
 		String json = gson.toJson(tasks, taskType);
 		model.addAttribute("json", json);
+	}
+	
+	public static void getFamilyTasks(int family_id, Model model)
+	{
+		// gets all the tasks for the given family
+		Session sess = ViewManager.getCurrentSession();
+		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
+		Transaction tr = sess.beginTransaction();
+		
+		FamilyModel family = (FamilyModel) sess.get(FamilyModel.class, family_id);
+		
+		// Gson that bitch
+		Constants.toJson(family.getTasks(), model);
 	}
 
 }

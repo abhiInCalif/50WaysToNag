@@ -21,24 +21,27 @@ public class NewFamilyView {
 		
 		FamilyModel new_family = new FamilyModel();
 		
+		int id = -1;
 		// step 2, get the current session user model
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
 		if(user != null) // valid session
-		{
-			user.addFamily(new_family);
+		{	
 			user = (UserModel) sess.merge(user);
-			
 			// step 3, add user to the family
 			new_family.addMember(user);
 			
 			// step 4, save it all
-			sess.save(new_family);
-			tr.commit();
+			id = (Integer) sess.save(new_family);
+			
+			user.addFamily(new_family);
+			sess.update(user);
+			
 		}
 		
 		// gson the user and send it back
 		Gson gson = new Gson();
-		String json = gson.toJson(user);
+		String json = gson.toJson(id);
+		tr.commit();
 		model.addAttribute("json", json);
 	}
 

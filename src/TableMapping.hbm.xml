@@ -12,8 +12,8 @@
 		<list name="members" table="FamilyMembers" inverse="false"
 			cascade="all">
 			<key column="FamilyMember_id" />
-			<list-index column="familymember_id" />
-			<one-to-many class="com.bday.model.UserModel" />
+			<list-index column="fmid" />
+			<many-to-many column="UserFamily_id" class="com.bday.model.UserModel" />
 		</list>
 		
 		<list name="tasks" table="FamilyTasks" inverse="false"
@@ -34,14 +34,20 @@
 			<generator class="increment"/>
 		</id>
 		
-		<list name="families" table="UserFamilies" cascade="all" inverse="false">
-			<key column="UserFamily"></key>
+		<list name="families" table="FamilyMembers" cascade="all" inverse="true">
+			<key column="UserFamily_id"></key>
 			<list-index column="userfamily_id"></list-index>
-			<one-to-many class="com.bday.model.FamilyModel"></one-to-many>
+			<many-to-many column="FamilyMember_id" class="com.bday.model.FamilyModel" />
 		</list>
 		
-		<property name="username" type="string">
-			<column name="Username"></column>
+		<property name="email" type="string">
+			<column name="Email"></column>
+		</property>
+		<property name="name" type="string">
+			<column name="Name"></column>
+		</property>
+		<property name="phoneNumber" type="string">
+			<column name="PhoneNumber"></column>
 		</property>
 		<property name="password" type="string">
 			<column name="Password"></column>
