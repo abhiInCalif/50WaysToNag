@@ -8,6 +8,18 @@ public class TaskModel {
 	private String title;
 	private boolean isCompleted;
 	private int nagStatus;
+	
+	public TaskModel(String title, String description, int nagStatus, boolean isCompleted) {
+		this.title = title;
+		this.details = description;
+		this.isCompleted = isCompleted;
+		this.nagStatus = nagStatus;
+	}
+	
+	public TaskModel()
+	{
+		// empty default constructor for all other cases
+	}
 	/**
 	 * @return the id
 	 */

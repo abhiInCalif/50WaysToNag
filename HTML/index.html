@@ -9,6 +9,8 @@
   <script src="js/ListController.js"></script>
   <script src="js/FamilyController.js"></script>
   <script src="js/base.js"></script>
+  <script src="js/ListServices.js"></script>
+  <script src="js/CreateFamilyService.js"></script>
   <script src="js/services.js"></script>
   <script src="js/AuthenticationController.js"></script>
   <script src="js/AuthenticationServices.js"></script>
@@ -43,41 +45,7 @@
         <button type="submit" data-theme="b">Sign Up</button>
     </form>
     <div>
-      <a href="#signin" data-role="button">Or Sign In</a>
-    </div>
-    </div>
-
-    <div data-role="footer" data-theme="a" data-position="fixed">
-      <h2></h2>
-    </div><!-- /footer -->
-  </div><!-- /page -->
-
-  <!-- It makes sense to have both login forms on the same document as they do very similar tasks -->
-  <!-- Login Page-->
-  <div data-role="page" data-theme="c" id="signin">
-
-    <div data-role="header" data-theme="a">
-      <h1>50 Ways to Nag!</h1>
-    </div><!-- /header -->
-
-    <div data-role="content">
-    <form name="login">
-      <ul data-role="listview" data-inset="true">
-        <li data-role="list-divider">Sign in!</li>
-          <li>
-          <label for="username" ng-show="error" id="error">Error invalid Username / Password</label>
-          <label for="username" class="ui-hidden-accessible">Username</label>
-          <input type="text" name="username" id="username" placeholder="Username" value="" ng-model="username" required>
-        </li>
-        <li>
-          <label for="password" class="ui-hidden-accessible">Password</label>
-          <input type="password" name="password" id="password" placeholder="Password" value="" ng-model="password" required>
-        </li>
-        </ul>
-        <button data-theme="b" ng-click="onClickOfLogin()">Sign In</button>
-    </form>
-    <div>
-      <a href="#signup" data-role="button">Or Sign Up</a>
+      <a href="/login" data-role="button">Or Log In</a>
     </div>
     </div>
 

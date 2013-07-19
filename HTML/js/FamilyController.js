@@ -12,7 +12,7 @@ function FamilyController($scope)
   },
   {
     "name": "Abhinav Khanna",
-    "email": "akhanna@princeton.edu",
+    "email": "abhinav.khanna@redbeacon.com",
     "username": "akhanna"
   }];
 }
