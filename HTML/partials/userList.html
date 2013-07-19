@@ -25,9 +25,10 @@
   <div data-role="footer" data-theme="a" data-position="fixed">
     <div data-role="navbar" data-iconpos="top">
       <ul>
+        <li><a ng-click="createFamily()" href="#">Test Family Create</a></li>
         <li><button ng-click="resetAll()">RESET ALL</button></li>
-        <li><a href="/userList">User Tasks</a></li>
-        <li><a href="/familyList">Family Tasks</a></li>
+        <li><a href="/userList" ng-click="getUserTasks()">User Tasks</a></li>
+        <li><a href="/familyList" ng-click="getFamilyTasks()">Family Tasks</a></li>
       </ul>
     </div><!-- /navbar -->
   </div><!-- /footer -->

@@ -1,5 +1,6 @@
 package com.bday.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,6 +12,12 @@ public class FamilyModel {
 	private int id;
 	private List<UserModel> members;
 	private List<TaskModel> tasks;
+	
+	public FamilyModel()
+	{
+		this.members = new ArrayList<UserModel>();
+		this.tasks = new ArrayList<TaskModel>();
+	}
 	
 	/**
 	 * @return the id
