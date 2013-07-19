@@ -1,6 +1,6 @@
 <!-- It makes sense to have both login forms on the same document as they do very similar tasks -->
 <!-- Login Page-->
-<div ng-controller="AuthenticationController" data-role="page" data-theme="c" id="signin">
+<div ng-controller="AuthenticationController" data-role="page" data-theme="c" id="login">
 
   <div data-role="header" data-theme="a">
     <h1>50 Ways to Nag!</h1>
@@ -9,7 +9,7 @@
   <div data-role="content">
   <form name="login">
     <ul data-role="listview" data-inset="true">
-      <li data-role="list-divider">Sign in!</li>
+      <li data-role="list-divider">Log in!</li>
         <li>
         <label for="username" ng-show="error" id="error">Error invalid Username / Password</label>
         <label for="username" class="ui-hidden-accessible">Username</label>
@@ -20,7 +20,7 @@
         <input type="password" name="password" id="password" placeholder="Password" value="" ng-model="password" required>
       </li>
       </ul>
-      <button data-theme="b" ng-click="onClickOfLogin()">Sign In</button>
+      <button data-theme="b" ng-click="onClickOfLogin($event)">Log In</button>
   </form>
   <div>
     <a href="/" data-role="button">Or Sign Up</a>

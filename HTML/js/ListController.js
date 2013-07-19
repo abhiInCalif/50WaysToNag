@@ -1,5 +1,6 @@
 function ListController($scope, $location, $routeParams, sharedTaskList, familyTasksService, createFamilyService)
 {
+  console.log('initing list');
 	//$scope.tasks = sharedTaskList.getList();
 
 	$scope.family_id = -1;
