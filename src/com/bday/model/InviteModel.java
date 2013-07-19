@@ -6,6 +6,21 @@ public class InviteModel {
 	private String message;
 	private FamilyModel family;
 	private UserModel asker;
+	
+	
+	
+	public InviteModel(UserModel user, FamilyModel family2, String message2) 
+	{
+		this.message = message2;
+		this.asker = user;
+		this.family = family2;
+	}
+	
+	public InviteModel()
+	{
+		// default
+	}
+	
 	/**
 	 * @return the id
 	 */

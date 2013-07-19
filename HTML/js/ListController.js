@@ -1,7 +1,35 @@
-function ListController($scope, $location, $routeParams, sharedTaskList, userSession)
+function ListController($scope, $location, $routeParams, sharedTaskList, familyTasksService, createFamilyService)
 {
-  $scope.currentUser = userSession.session;
-	$scope.tasks = sharedTaskList.getList();
+	//$scope.tasks = sharedTaskList.getList();
+
+	$scope.family_id = -1;
+
+	$scope.getFamilyTasks = function()
+	{
+		familyTasksService.get(function(data)
+		{
+      console.log('family tasks successfully loaded!')
+			$scope.tasks = data;
+		});
+	};
+
+	$scope.createFamily = function()
+	{
+		createFamilyService.create(function(data)
+		{
+			$scope.family_id = data;
+		});
+	};
+
+	$scope.getUserTasks = function()
+	{
+    console.log('getusertask');
+		familyTasksService.getUserTasks(function(data)
+		{
+      console.log('user tasks successfully loaded!')
+			$scope.tasks = data;
+		});
+	};
 
   $scope.updateTask = function() {
     sharedTaskList.setList($scope.tasks);
@@ -10,7 +38,10 @@ function ListController($scope, $location, $routeParams, sharedTaskList, userSes
 
   $scope.addTask = function() {
     $scope.tasks.push($scope.newTask);
-    sharedTaskList.incrementNewTaskId();
+    familyTasksService.post($scope.newTask, function(data)
+	  {
+			$location.path("/familyList");
+	  });
     $scope.updateTask();
   };
 
@@ -37,12 +68,11 @@ function ListController($scope, $location, $routeParams, sharedTaskList, userSes
 
   // TODO: need to know which user is currently logged on
   $scope.newTask = {
-      "task_id": sharedTaskList.getNewTaskId(),
       "title": "",
       "details": "",
       "isCompleted": false,
       "nagStatus": 5,
-      "assignee": "someuser"
+		  "user": 1   // Abhi: what is this for?
   };
 
   // when navigating to details page

@@ -14,22 +14,29 @@ import com.google.gson.Gson;
 
 public class FamilyView {
 
-	public static void postTask(TaskModel mTask, int family_id, Model model) {
+	public static void postTask(TaskModel mTask, int family_id, String email, Model model) {
 		// adds a task to the given Family object
 		// step 1, grab the family object from the id;
 		Session sess = ViewManager.getCurrentSession();
 		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
 		Transaction tr = sess.beginTransaction();
-		
+				
 		FamilyModel family = (FamilyModel) sess.get(FamilyModel.class, family_id);
+		UserModel user = (UserModel) sess.createQuery("from UserModel as user where user.email=?").setString(0, email).list().get(0);
+		if(user == null) return; // error occured;
+		
+		mTask.setAssignee(user);
+		user.addTask(mTask);
 		
 		// step 2, add the task and save the object
 		family.addTask(mTask);
+//		sess.save(mTask);
 		sess.update(family);
-		tr.commit();
+		sess.update(user);
 		
 		// Gson the family object and return it;
 		Constants.toJson(family, model);
+		tr.commit();
 	}
 
 	public static void get(int family_id, Model model) {
