@@ -1,6 +1,7 @@
 
 var createFamilyService = app.factory("createFamilyService", function($http, $templateCache)
 {
+	console.log('family created!');
 	return {
 		create: function(callback)
 		{

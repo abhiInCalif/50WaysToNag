@@ -10,6 +10,7 @@ function AuthenticationController($scope, authService, $location)
       // double check that the two passwords are equal
       if($scope.password != $scope.retype)
       {
+        // we need to handle this somehow
         console.log('passwords not equal');
         return false;
       }

@@ -1,17 +1,14 @@
 function ListController($scope, $location, $routeParams, sharedTaskList, familyTasksService, createFamilyService)
 {
-  console.log('initing list');
 	//$scope.tasks = sharedTaskList.getList();
 
 	$scope.family_id = -1;
 
 	$scope.getFamilyTasks = function()
 	{
-    console.log('getfamilytask');
-    console.log($scope.tasks);
 		familyTasksService.get(function(data)
 		{
-      console.log('got it');
+      console.log('family tasks successfully loaded!')
 			$scope.tasks = data;
 		});
 	};
@@ -29,6 +26,7 @@ function ListController($scope, $location, $routeParams, sharedTaskList, familyT
     console.log('getusertask');
 		familyTasksService.getUserTasks(function(data)
 		{
+      console.log('user tasks successfully loaded!')
 			$scope.tasks = data;
 		});
 	};
