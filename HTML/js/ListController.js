@@ -8,7 +8,7 @@ function ListController($scope, $location, $routeParams, sharedTaskList, familyT
 	{
 		familyTasksService.get(function(data)
 		{
-      console.log('family tasks successfully loaded!')
+      console.log('family tasks successfully loaded!');
 			$scope.tasks = data;
 		});
 	};
@@ -26,7 +26,7 @@ function ListController($scope, $location, $routeParams, sharedTaskList, familyT
     console.log('getusertask');
 		familyTasksService.getUserTasks(function(data)
 		{
-      console.log('user tasks successfully loaded!')
+      console.log('user tasks successfully loaded!');
 			$scope.tasks = data;
 		});
 	};
