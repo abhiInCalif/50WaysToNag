@@ -1,8 +1,8 @@
-function ListController($scope, $location, $routeParams, sharedTaskList, familyTasksService, createFamilyService)
+function ListController($scope, $location, $routeParams, sharedTaskList, familyTasksService, createFamilyService, tasksService)
 {
 	//$scope.tasks = sharedTaskList.getList();
+	
 	$scope.tasks = [];
-	$scope.family_id = -1;
 
 	$scope.getFamilyTasks = function()
 	{
@@ -30,10 +30,21 @@ function ListController($scope, $location, $routeParams, sharedTaskList, familyT
 			$scope.tasks = data;
 		});
 	};
+	
+	$scope.getTaskDetails = function()
+	{
+		console.log("gettaskdetails");
+		tasksService.getDetails($routeParams.taskId, function(data)
+		{
+			$scope.currentTask = data;
+		});
+	};
 
   $scope.updateTask = function() {
-    sharedTaskList.setList($scope.tasks);
-    $location.path('/familyList');
+		tasksService.editDetails($scope.currentTask.id, $scope.currentTask, function(data)
+		{
+			$location.path('/familyList');
+		});
   };
 
   $scope.addTask = function() {
@@ -58,7 +69,7 @@ function ListController($scope, $location, $routeParams, sharedTaskList, familyT
   {
     for (var k = 0; k < $scope.tasks.length; k++)
     {
-      if ($scope.tasks[k].task_id == id)
+      if ($scope.tasks[k].id == id)
       {
         return k;
       }
@@ -72,12 +83,6 @@ function ListController($scope, $location, $routeParams, sharedTaskList, familyT
       "details": "",
       "isCompleted": false,
       "nagStatus": 5,
-		  "user": 1   // Abhi: what is this for?
+		  "user": 1   // Abhi: what is this for? I don't know.... (abhi....)
   };
-
-  // when navigating to details page
-  if ($routeParams.taskId)
-  {
-    $scope.currentTask = $scope.tasks[getTaskById($routeParams.taskId)];
-  }
 }

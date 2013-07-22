@@ -88,7 +88,9 @@
 			<column name="NagStatus"></column>
 		</property>
 		
-		<one-to-one name="assignee" class="com.bday.model.UserModel" cascade="all"></one-to-one>
+		<many-to-one name="assignee" class="com.bday.model.UserModel" cascade="all">
+			<column name="UserID" not-null="true"></column>
+		</many-to-one>
 		
 	</class>
 	

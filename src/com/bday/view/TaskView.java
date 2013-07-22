@@ -15,7 +15,6 @@ import com.bday.model.FamilyModel;
 import com.bday.model.TaskModel;
 import com.bday.model.UserModel;
 import com.bday.utils.Constants;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class TaskView {
@@ -36,10 +35,8 @@ public class TaskView {
 		// step three retrieve all the tasks from the user object
 		List<TaskModel> tasks = user.getTasks();
 		
-		Gson gson = new Gson();
 		Type taskType = new TypeToken<List<TaskModel>>() {}.getType();
-		String json = gson.toJson(tasks, taskType);
-		model.addAttribute("json", json);
+		Constants.toJson(tasks, taskType, model);
 	}
 	
 	public static void getFamilyTasks(int family_id, Model model)
@@ -50,6 +47,8 @@ public class TaskView {
 		Transaction tr = sess.beginTransaction();
 		
 		FamilyModel family = (FamilyModel) sess.get(FamilyModel.class, family_id);
+		
+		if (family == null) throw new RuntimeException("No family created. please create a family first.");
 		
 		// Gson that bitch
 		Constants.toJson(family.getTasks(), model);

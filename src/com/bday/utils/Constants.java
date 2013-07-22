@@ -1,5 +1,8 @@
 package com.bday.utils;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
@@ -10,6 +13,7 @@ import com.bday.model.TaskModel;
 import com.bday.model.UserModel;
 import com.bday.view.ViewManager;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -40,9 +44,20 @@ public class Constants
 	// public utility functions
 	public static void toJson(Object o, Model m)
 	{
-		Gson gson = new Gson();
-		String json = gson.toJson(o);
+		GsonBuilder gson = new GsonBuilder();
+		gson.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
+		Gson g = gson.create();
+		String json = g.toJson(o);
 		m.addAttribute("json", json);
+	}
+	
+	public static void toJson(Object o, Type taskType,
+			Model model) {
+		GsonBuilder gson = new GsonBuilder();
+		gson.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
+		Gson g = gson.create();
+		String json = g.toJson(o, taskType);
+		model.addAttribute("json", json);
 	}
 	
 	// public utility parse JSON function

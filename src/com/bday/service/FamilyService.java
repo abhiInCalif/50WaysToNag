@@ -43,7 +43,7 @@ public class FamilyService
 		int family_id = user.getFamilies().get(1).getId();
 		
 		// issue the request
-		FamilyView.postTask(mTask, family_id, user_email, model);
+		FamilyView.postTask(session, mTask, family_id, user_email, model);
 		return "JSONView";
 	}
 	
@@ -54,10 +54,17 @@ public class FamilyService
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
 		int id = -1;
 		if(!user.getFamilies().isEmpty())
-			 id = user.getFamilies().get(1).getId();
+			id = user.getFirstNotNullFamily().getId();
 		
 		// issue request
 		TaskView.getFamilyTasks(id, model);
+		return "JSONView";
+	}
+	
+	@RequestMapping(value="/members", method = RequestMethod.GET)
+	public String getFamilyMembers(HttpSession session, Model model)
+	{
+		FamilyView.getMembers(session, model);
 		return "JSONView";
 	}
 	

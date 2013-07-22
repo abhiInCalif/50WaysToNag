@@ -14,8 +14,8 @@
       <ul data-filter="true" data-role="listview">
         <label ng-repeat="task in tasks | orderBy: 'title' | filter:searchTasks">
           <li>
-          <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}} <!--for debug-->({{task.assignee}})
-          <a href="/edit/{{task.task_id}}">Edit</a>
+          <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}} <!--for debug-->({{task.assignee.email}})
+          <a href="/edit/{{task.id}}">Edit</a>
           </li>
         </label>
       </ul>

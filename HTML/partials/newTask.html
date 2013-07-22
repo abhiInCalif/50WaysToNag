@@ -10,12 +10,12 @@
     <!-- will automatically expand though initial height is 100px -->
     <textarea name="textarea" id="textarea" placeholder="Details" style="height: 100px" ng-model="newTask.details">
     </textarea>
-    <label ng-controller="FamilyController"> Assigned For:
+    <label ng-controller="FamilyController" ng-init="getMembers()"> Assigned For:
       <br>
       <label ng-repeat="user in users">
         <label>
         <input type="radio" ng-model="$parent.$parent.newTask.assignee" value="{{user.email}}"/>
-        {{user.name}}</label>
+        {{user.email}}</label>
       </label>
     </label>
   </div>

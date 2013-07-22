@@ -41,8 +41,14 @@ public class TaskDetailsView {
 	}
 
 	public static void get(int id, Model model) {
-		// TODO Auto-generated method stub
+		Session sess = ViewManager.getCurrentSession();
+		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
+		Transaction tr = sess.beginTransaction();
 		
+		TaskModel task = (TaskModel) sess.get(TaskModel.class, id);
+		
+		Constants.toJson(task, model);
+		tr.commit();
 	}
 
 	public static void delete(int id, Model model) 

@@ -129,6 +129,23 @@ public class UserModel
 	public void addInvite(InviteModel mInvite) {
 		this.invitations.add(mInvite);
 	}
+
+	public FamilyModel getFirstNotNullFamily() 
+	{
+		for (int i = 0; i < families.size(); i++)
+		{
+			if (families.get(i) != null)
+				return families.get(i);
+		}
+		
+		// else create a new family, associate it and add it to the
+		// grouping
+		FamilyModel family = new FamilyModel();
+		family.addMember(this);
+		addFamily(family);
+		
+		return family;
+	}
 	
 	
 }

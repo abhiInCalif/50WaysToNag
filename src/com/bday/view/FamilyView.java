@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 public class FamilyView {
 
-	public static void postTask(TaskModel mTask, int family_id, String email, Model model) {
+	public static void postTask(HttpSession session, TaskModel mTask, int family_id, String email, Model model) {
 		// adds a task to the given Family object
 		// step 1, grab the family object from the id;
 		Session sess = ViewManager.getCurrentSession();
@@ -27,12 +27,15 @@ public class FamilyView {
 		
 		mTask.setAssignee(user);
 		user.addTask(mTask);
-		
+				
 		// step 2, add the task and save the object
 		family.addTask(mTask);
-//		sess.save(mTask);
+		sess.save(mTask);
 		sess.update(family);
 		sess.update(user);
+		
+		// update the session
+		session.setAttribute(Constants.USER, user);
 		
 		// Gson the family object and return it;
 		Constants.toJson(family, model);
@@ -72,6 +75,22 @@ public class FamilyView {
 		tr.commit();
 		
 		Constants.toJson(family, model);
+	}
+
+	public static void getMembers(HttpSession session, Model model) 
+	{
+		Session sess = ViewManager.getCurrentSession();
+		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
+		Transaction tr = sess.beginTransaction();
+		
+		UserModel user = (UserModel) session.getAttribute(Constants.USER);
+		user = (UserModel) sess.merge(user);
+		
+		FamilyModel family = user.getFirstNotNullFamily();
+		sess.saveOrUpdate(family);
+		
+		Constants.toJson(family.getMembers(), model);
+		tr.commit();
 	}
 	
 

@@ -1,13 +1,12 @@
-var authService = app.factory('authService', function($http, $templateCache) {
+var authService = app.factory('authService', function($http) {
 	return {
 		login: function(username, password, callback)
 		{
 			$http({method: "GET", 
-					url: "/Bday/login?username=" + username + "&password=" + password, 
-					cache: $templateCache
+					url: "/Bday/login?username=" + username + "&password=" + password
 					}).success(function(data, status, headers, config)
 					{
-						callback(data)
+						callback(data);
 					}).error(function(data, status, headers, config)
 					{
 						// handle the error in a delicate manner
@@ -18,11 +17,10 @@ var authService = app.factory('authService', function($http, $templateCache) {
 		{
 			$http({method: "POST", 
 					url: "/Bday/login", 
-					data: {"email": email, "password": password},
-					cache: $templateCache
+					data: {"email": email, "password": password}
 					}).success(function(data, status, headers, config)
 					{
-						callback(data)
+						callback(data);
 					}).error(function(data, status, headers, config)
 					{
 						// handle the error in a delicate manner

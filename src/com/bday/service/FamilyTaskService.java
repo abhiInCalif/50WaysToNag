@@ -20,8 +20,9 @@ import com.google.gson.JsonObject;
 public class FamilyTaskService {
 	
 	// post a new task under this family name
+	// deprecated.....for now
 	@RequestMapping(method = RequestMethod.POST)
-	public String post(@RequestBody String request, @PathVariable int id, Model model)
+	public String post(HttpSession session, @RequestBody String request, @PathVariable int id, Model model)
 	{
 		JsonObject jRequest = Constants.parse(request);
 		String user_email = jRequest.get(Constants.ASSIGNEE).getAsString();
@@ -30,7 +31,7 @@ public class FamilyTaskService {
 		boolean isCompleted = jRequest.get(Constants.IS_COMPLETED).getAsBoolean();
 		int nagStatus = jRequest.get(Constants.NAG_STATUS).getAsInt();
 		TaskModel mTask = new TaskModel(title, description, nagStatus, isCompleted);
-		FamilyView.postTask(mTask, id, user_email, model);
+		FamilyView.postTask(session, mTask, id, user_email, model);
 		return "JSONView";
 	}
 	
