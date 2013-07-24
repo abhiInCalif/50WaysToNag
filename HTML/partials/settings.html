@@ -1,0 +1,45 @@
+<div ng-controller="ListController" data-role="page" data-theme="c" id="list-user">
+  <div data-role="header" data-theme="a">
+    <!-- should invoke logout -->
+    <a href="/" class="thumb">Logout</a>
+    <h1>Settings</h1>
+  </div><!-- /header -->
+
+  <div data-role="content">
+	 	<fieldset data-role="controlgroup">
+			<ul data-role="listview" data-inset="true">
+				<li>
+					<label>Reset Password:</label>
+					<label for="password" style="display: none;">Password:</label>
+					<input type="password" name="password" id="password" value="" autocomplete="off" placeholder="Old Password">
+					<label for="password" style="display: none;">New Password:</label>
+					<input type="password" name="password" id="new_password" value="" autocomplete="off" placeholder="New Password">
+					<button data-theme="b">Update Password</button>
+				</li>
+			</ul>
+		</fieldset>
+	 	<fieldset data-role="controlgroup">
+			<ul data-role="listview" data-inset="true">
+				<li>
+					<label>Invite Others:</label>
+					<form>
+					    <label for="emails" style="display: none;">Emails:</label>
+					    <textarea cols="40" rows="25" name="emails" id="emails" placeholder="Comma separated list of emails" style="height: 120px;"></textarea>
+					</form>
+					<button data-theme="b">Invite Others</button>
+				</li>
+			</ul>
+		</fieldset>  
+		<a href="#" data-role="button">Create a Family</a>
+	</div>
+
+  <div data-role="footer" data-theme="a" data-position="fixed">
+    <div data-role="navbar" data-iconpos="top">
+      <ul>
+        <li><a href="/userList">User Tasks</a></li>
+        <li><a href="/familyList">Family Tasks</a></li>
+        <li><a href="/settings">Settings</a></li>
+      </ul>
+    </div><!-- /navbar -->
+  </div><!-- /footer -->
+</div><!-- /page -->

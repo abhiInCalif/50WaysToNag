@@ -7,5 +7,6 @@ var app = angular.module('bday', []).
       when('/familyList', {templateUrl: 'partials/familyList.html'}).
       when('/edit/:taskId', {templateUrl: 'partials/taskDetails.html'}).
       when('/new', {templateUrl: 'partials/newTask.html'}).
+			when("/settings", {templateUrl: 'partials/settings.html'}).
 		  when("/login", {templateUrl: 'partials/login.html'});
 }]);
