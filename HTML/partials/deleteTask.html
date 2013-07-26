@@ -1,6 +1,7 @@
-<div data-role="dialog" data-theme="a">
+<div data-role="dialog" data-theme="a" ng-controller="ListController">
   <div data-role="content" data-theme="b">
     <h1>Are you sure you want to delete this task?</h1>
+    <a class="button" data-role="button" ng-click="deleteTask()">Yess</a>
     <a class="button" data-role="button" data-rel="back">Cancel</a>
   </div>
 </div>

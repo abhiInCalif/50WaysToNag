@@ -1,8 +1,17 @@
 function ListController($scope, $location, $routeParams, authService, sharedTaskList, familyTasksService, createFamilyService, tasksService)
 {
-	//$scope.tasks = sharedTaskList.getList();
 
 	$scope.tasks = [];
+
+  $scope.deleteTask = function()
+  {
+    console.log('task should be deleted');
+    // because asynch call
+    $scope.$apply(function() {
+      // defaults to userList for now until we combine userlist and familylist
+      $location.path('/userList');
+    });
+  };
 
 	$scope.getFamilyTasks = function()
 	{
@@ -12,7 +21,7 @@ function ListController($scope, $location, $routeParams, authService, sharedTask
 			$scope.tasks = data;
 		});
 	};
-	
+
 	$scope.logout = function()
 	{
 		authService.logout(function(data)
@@ -29,7 +38,7 @@ function ListController($scope, $location, $routeParams, authService, sharedTask
 			$scope.family_id = data;
 		});
 	};
-	
+
 	$scope.nag = function()
 	{
 		tasksService.nag($routeParams.taskId, function(data)
@@ -50,7 +59,6 @@ function ListController($scope, $location, $routeParams, authService, sharedTask
 
 	$scope.getTaskDetails = function()
 	{
-		console.log("gettaskdetails");
 		tasksService.getDetails($routeParams.taskId, function(data)
 		{
 			$scope.currentTask = data;
@@ -58,6 +66,7 @@ function ListController($scope, $location, $routeParams, authService, sharedTask
 	};
 
   $scope.updateTask = function() {
+    debugger;
 		tasksService.editDetails($scope.currentTask.id, $scope.currentTask, function(data)
 		{
 			$location.path('/familyList');
@@ -71,14 +80,6 @@ function ListController($scope, $location, $routeParams, authService, sharedTask
 			$location.path("/familyList");
 	  });
     $scope.updateTask();
-  };
-
-  // for debugging purposes for now
-  // resets to data pulled from server
-  // will be used in production in future
-  $scope.resetAll = function() {
-    sharedTaskList.setList();
-    $scope.tasks = sharedTaskList.getList();
   };
 
   // O(n) for now

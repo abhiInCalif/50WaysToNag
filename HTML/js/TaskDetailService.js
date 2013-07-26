@@ -15,10 +15,10 @@ var tasksService = app.factory('tasksService', function ($http) {
 							console.log(headers);
 						});
 		},
-		
+
 		editDetails: function(task_id, mTask, callback)
 		{
-			$http({method: "PUT", 
+			$http({method: "PUT",
 					url: "/Bday/tasks/" + task_id,
 					data: mTask}).success(function(data, status, headers, config)
 					{
@@ -31,7 +31,7 @@ var tasksService = app.factory('tasksService', function ($http) {
 						console.log(headers);
 					});
 		},
-		
+
 		nag: function(task_id, callback)
 		{
 			$http({method: "POST",

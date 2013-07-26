@@ -14,11 +14,11 @@
       <br>
       <label ng-repeat="user in users">
         <label>
-        <input type="radio" ng-model="$parent.$parent.currentTask.assignee" value="{{user.email}}"/>
+        <input type="radio" ng-model="$parent.$parent.currentTask.assignee.email" value="{{user.email}}"/>
         {{user.email}}</label>
       </label>
     </label>
-    <a href="/{{currentTask.task_id}}/delete" data-role="button" data-rel="dialog" data-transition="pop">Delete Task</a>
+    <a href="/{{currentTask.id}}/delete" data-role="button" data-rel="dialog" data-transition="pop">Delete Task</a>
   </div>
   <div data-role="footer" data-theme="a" data-position="fixed">
     <h2></h2>

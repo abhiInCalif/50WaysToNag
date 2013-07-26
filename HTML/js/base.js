@@ -8,8 +8,8 @@ var app = angular.module('bday', []).
       when('/settings/invite', {templateUrl: 'partials/invite.html'}).
       when('/userList', {templateUrl: 'partials/userList.html'}).
       when('/familyList', {templateUrl: 'partials/familyList.html'}).
-      when('/:task_id/edit', {templateUrl: 'partials/editTask.html'}).
-      when('/:task_id/delete', {templateUrl: 'partials/deleteTask.html'}).
+      when('/:taskId/edit', {templateUrl: 'partials/editTask.html'}).
+      when('/:taskId/delete', {templateUrl: 'partials/deleteTask.html'}).
       when('/new', {templateUrl: 'partials/newTask.html'});
 }]);
 
