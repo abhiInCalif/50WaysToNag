@@ -18,7 +18,7 @@ import com.google.gson.JsonObject;
 
 @Controller
 @RequestMapping("/family")
-public class FamilyService 
+public class FamilyService
 {
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(HttpSession session, Model model)
@@ -26,7 +26,7 @@ public class FamilyService
 		NewFamilyView.create(session, model);
 		return "JSONView";
 	}
-	
+
 	@RequestMapping(value = "/task", method = RequestMethod.POST)
 	public String addTask(@RequestBody String request, HttpSession session, Model model)
 	{
@@ -41,29 +41,28 @@ public class FamilyService
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
 		// defaults to the first family that the user is a part of
 		int family_id = user.getFirstNotNullFamily().getId();
-		
+
 		// issue the request
 		FamilyView.postTask(session, mTask, family_id, user_email, model);
 		return "JSONView";
 	}
-	
+
 	@RequestMapping(value = "/task", method = RequestMethod.GET)
 	public String getAllTasks(HttpSession session, Model model)
 	{
 		// retrieve session object and get the family id (0)
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
 		int id = user.getFirstNotNullFamily().getId();
-		
 		// issue request
 		TaskView.getFamilyTasks(id, model);
 		return "JSONView";
 	}
-	
+
 	@RequestMapping(value="/members", method = RequestMethod.GET)
 	public String getFamilyMembers(HttpSession session, Model model)
 	{
 		FamilyView.getMembers(session, model);
 		return "JSONView";
 	}
-	
+
 }
