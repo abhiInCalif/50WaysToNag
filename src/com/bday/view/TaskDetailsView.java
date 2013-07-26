@@ -1,5 +1,8 @@
 package com.bday.view;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
@@ -11,6 +14,7 @@ import com.bday.manager.InsultManager;
 import com.bday.model.TaskModel;
 import com.bday.model.UserModel;
 import com.bday.utils.Constants;
+import com.google.gson.reflect.TypeToken;
 
 public class TaskDetailsView {
 
@@ -59,7 +63,8 @@ public class TaskDetailsView {
 		// step 2, merge the task with the database task
 		sess.merge(mTask);
 		
-		Constants.toJson(mTask, model);
+		Type taskType = new TypeToken<TaskModel>() {}.getType();
+		Constants.toJson(mTask, taskType, model);
 		tr.commit();
 	}
 

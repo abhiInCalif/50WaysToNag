@@ -3,7 +3,7 @@ var authService = app.factory('authService', function($http) {
 		login: function(username, password, callback)
 		{
 			$http({method: "GET", 
-					url: "/Bday/login?username=" + username + "&password=" + password
+					url: "/Bday/login?username=" + username + "&password=" + md5(password)
 					}).success(function(data, status, headers, config)
 					{
 						callback(data);
@@ -17,7 +17,7 @@ var authService = app.factory('authService', function($http) {
 		{
 			$http({method: "POST", 
 					url: "/Bday/login", 
-					data: {"email": email, "password": password, "phone": phone}
+					data: {"email": email, "password": md5(password), "phone": phone}
 					}).success(function(data, status, headers, config)
 					{
 						callback(data);
