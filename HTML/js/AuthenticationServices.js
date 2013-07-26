@@ -13,11 +13,11 @@ var authService = app.factory('authService', function($http) {
 					});
 		},
 		
-		register: function(email, password, callback)
+		register: function(email, password, phone, callback)
 		{
 			$http({method: "POST", 
 					url: "/Bday/login", 
-					data: {"email": email, "password": password}
+					data: {"email": email, "password": password, "phone": phone}
 					}).success(function(data, status, headers, config)
 					{
 						callback(data);

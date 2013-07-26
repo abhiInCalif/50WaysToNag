@@ -34,7 +34,8 @@ public class AuthenticationService
 		JsonObject jRequest = Constants.parse(request);
 		String email = jRequest.get(Constants.ID_EMAIL).getAsString();
 		String password = jRequest.get(Constants.ID_PASSWORD).getAsString();
-		AuthenticationView.create_user(email, password, model);
+		String phoneNumber = jRequest.get(Constants.ID_PHONE).getAsString();
+		AuthenticationView.create_user(email, password, phoneNumber, model);
 		return "JSONView";
 	}
 	

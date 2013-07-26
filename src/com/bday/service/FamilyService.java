@@ -40,7 +40,7 @@ public class FamilyService
 		TaskModel mTask = new TaskModel(title, description, nagStatus, isCompleted);
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
 		// defaults to the first family that the user is a part of
-		int family_id = user.getFamilies().get(1).getId();
+		int family_id = user.getFirstNotNullFamily().getId();
 		
 		// issue the request
 		FamilyView.postTask(session, mTask, family_id, user_email, model);
@@ -52,9 +52,7 @@ public class FamilyService
 	{
 		// retrieve session object and get the family id (0)
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
-		int id = -1;
-		if(!user.getFamilies().isEmpty())
-			id = user.getFirstNotNullFamily().getId();
+		int id = user.getFirstNotNullFamily().getId();
 		
 		// issue request
 		TaskView.getFamilyTasks(id, model);

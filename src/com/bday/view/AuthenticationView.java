@@ -19,7 +19,7 @@ public class AuthenticationView
 {
 	
 	// creates a new user, does not login the user after creation.
-	public static void create_user(String email, String password, Model model)
+	public static void create_user(String email, String password, String phoneNumber, Model model)
 	{
 		Session sess = ViewManager.getCurrentSession();
 		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
@@ -32,6 +32,8 @@ public class AuthenticationView
 				UserModel user = new UserModel();
 				user.setEmail(email);
 				user.setPassword(password);
+				user.setPhoneNumber(phoneNumber);
+				
 				int id = (Integer) sess.save(user);
 				sess.flush();
 				tr.commit();
@@ -116,7 +118,7 @@ public class AuthenticationView
 		model.addAttribute("json", success);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unused", "unchecked"})
 	private static UserModel isValidUser(String username, String password)
 	{
 		Session sess = ViewManager.getCurrentSession();
@@ -130,7 +132,7 @@ public class AuthenticationView
 			return null;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unused", "unchecked"})
 	private static boolean isUserAlready(String email)
 	{
 		Session sess = ViewManager.getCurrentSession();
