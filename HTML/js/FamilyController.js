@@ -2,6 +2,7 @@ function FamilyController($scope, familyService)
 {
   // TODO: we should add email and name to database as well
   $scope.users = [];
+  $scope.invitedUser = "";
 
 	$scope.getMembers = function()
 	{
@@ -10,4 +11,9 @@ function FamilyController($scope, familyService)
 			$scope.users = data;
 		});
 	};
+
+  $scope.inviteMember = function()
+  {
+    console.log($scope.invitedUser);
+  };
 }

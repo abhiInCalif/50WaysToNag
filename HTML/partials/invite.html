@@ -6,9 +6,10 @@
 
   <div data-role="content">
     <!-- for debug -->
-    <h1> INVITE TO FAMILY </h1>
-    <form name="invite" ng-submit="">
-    <input type="text" name="username" id="invite-username" placeholder="Username" value="" ng-model="username" required>
+    <h1> INVITE TsO FAMILY </h1>
+    <form name="invite" ng-submit="inviteMember()">
+      <input type="text" name="username" id="invite-username" placeholder="Username" ng-model="invitedUser">
+    </form>
   </div>
 
   <div data-role="footer" data-theme="a" data-position="fixed">
