@@ -1,7 +1,7 @@
 <div ng-controller="InvitationsController" data-role="page" data-theme="c" id="list-user">
-  <div data-role="header" data-theme="a">
+  <div data-role="header" data-theme="a" ng-controller="ListController">
     <!-- should invoke logout -->
-    <a href="/" class="thumb">Logout</a>
+    <a ng-list="logout()" class="thumb">Logout</a>
     <h1>Settings</h1>
   </div><!-- /header -->
 
@@ -29,7 +29,21 @@
 					<button data-theme="b" ng-click="invite()">Invite Others</button>
 				</li>
 			</ul>
-		</fieldset>  
+		</fieldset>
+		
+		<!-- This is the invites portion: probably should be refactored into the top of the page....but w/evs-->
+		<form ng-controller="BaseController" ng-init="getInvites()">
+			<ul data-role="listview" data-inset="true">
+				<li data-role="fieldcontain" ng-repeat="invite in invites">
+					<label for="acceptDenty">Invite from {{invite.asker.email}}</label>
+					<fieldset class="ui-grid-a">
+                  <div class="ui-block-a"><button ng-click="deny(invite.id, invite.family.id)" data-theme="d">Deny</button></div>
+                  <div class="ui-block-b"><button ng-click="accept(invite.id, invite.family.id)" data-theme="a">Accept</button></div>
+          </fieldset>
+				</li>
+			</ul>
+		</form>
+		 
 	</div>
 
   <div data-role="footer" data-theme="a" data-position="fixed">

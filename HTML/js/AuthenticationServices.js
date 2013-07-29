@@ -25,6 +25,19 @@ var authService = app.factory('authService', function($http) {
 					{
 						// handle the error in a delicate manner
 					});
+		},
+		
+		logout: function(callback)
+		{
+			$http({method: "POST", 
+					url: "/Bday/login/logout"
+					}).success(function(data, status, headers, config)
+					{
+						callback(data);
+					}).error(function(data, status, headers, config)
+					{
+						// handle the error in a delicate manner
+					});
 		}
 	};
 	

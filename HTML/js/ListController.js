@@ -1,4 +1,4 @@
-function ListController($scope, $location, $routeParams, sharedTaskList, familyTasksService, createFamilyService, tasksService)
+function ListController($scope, $location, $routeParams, authService, sharedTaskList, familyTasksService, createFamilyService, tasksService)
 {
 	//$scope.tasks = sharedTaskList.getList();
 	
@@ -10,6 +10,15 @@ function ListController($scope, $location, $routeParams, sharedTaskList, familyT
 		{
       console.log('family tasks successfully loaded!');
 			$scope.tasks = data;
+		});
+	};
+	
+	$scope.logout = function()
+	{
+		authService.logout(function(data)
+		{
+			// move location to home
+			$location.path("/");
 		});
 	};
 

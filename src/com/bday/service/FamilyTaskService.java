@@ -21,6 +21,7 @@ public class FamilyTaskService {
 	
 	// post a new task under this family name
 	// deprecated.....for now
+	@Deprecated
 	@RequestMapping(method = RequestMethod.POST)
 	public String post(HttpSession session, @RequestBody String request, @PathVariable int id, Model model)
 	{

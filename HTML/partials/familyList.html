@@ -1,7 +1,7 @@
 <div ng-controller="ListController" ng-init="getFamilyTasks()" data-role="page" data-theme="c" id="list-user">
   <div data-role="header" data-theme="a">
     <!-- should invoke logout -->
-    <a href="/" class="thumb">Logout</a>
+    <a ng-click="logout()" class="thumb">Logout</a>
     <h1>Tasks - Family</h1>
     <a href="/new" class="thumb" data-theme="b">New Task</a>
   </div><!-- /header -->

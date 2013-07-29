@@ -17,7 +17,25 @@ function BaseController($scope, InviteServices)
 	
 	$scope.getInvites = function()
 	{
-		InviteServices.getAllInvites(function(data)
+		InviteServices.getAllInvitations(function(data)
+		{
+			// show all the invites
+			$scope.invites = data;
+		});
+	};
+	
+	$scope.accept = function(invite_id, family_id)
+	{
+		InviteServices.accept(invite_id, family_id, function(data)
+		{
+			// show all the invites
+			$scope.invites = data;
+		});
+	};
+	
+	$scope.deny = function(invite_id, family_id)
+	{
+		InviteServices.deny(invite_id, family_id, function(data)
 		{
 			// show all the invites
 			$scope.invites = data;

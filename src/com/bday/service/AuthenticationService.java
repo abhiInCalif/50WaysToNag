@@ -59,4 +59,12 @@ public class AuthenticationService
 		return "JSONView";
 	}
 	
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public String logout(HttpSession session)
+	{
+		session.invalidate();
+		session.setAttribute(Constants.USER, "");
+		return "JSONView";
+	}
+	
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.bday.model.UserModel;
 import com.bday.utils.Constants;
 import com.bday.view.InviteView;
-import com.bday.view.NewFamilyView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -42,6 +42,20 @@ public class InviteService
 	public String getAllUserInvites(HttpSession session, Model model)
 	{
 		InviteView.getUserInvites(session, model);
+		return "JSONView";
+	}
+	
+	@RequestMapping(value="/{id}/{family_id}/accept", method = RequestMethod.POST)
+	public String acceptInvite(@PathVariable int id, @PathVariable int family_id, HttpSession session, Model model)
+	{
+		InviteView.accept(session, id, family_id, model);
+		return "JSONView";
+	}
+	
+	@RequestMapping(value="/{id}/{family_id}/deny", method = RequestMethod.POST)
+	public String denyInvite(@PathVariable int id, @PathVariable int family_id, HttpSession session, Model model)
+	{
+		InviteView.deny(session, id, family_id, model);
 		return "JSONView";
 	}
 }

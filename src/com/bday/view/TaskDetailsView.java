@@ -47,7 +47,7 @@ public class TaskDetailsView {
 		
 	}
 
-	public static void put(TaskModel mTask, int id, String user_email, Model model) {
+	public static void put(HttpSession session, TaskModel mTask, int id, String user_email, Model model) {
 		// update the task model in the database
 		Session sess = ViewManager.getCurrentSession();
 		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
@@ -59,6 +59,13 @@ public class TaskDetailsView {
 		
 		mTask.setId(id);
 		mTask.setAssignee(user);
+		
+		UserModel sess_user = (UserModel) session.getAttribute(Constants.USER);
+		if(user.getEmail().equals(sess_user.getEmail()))
+		{
+			sess_user.addTask(mTask);
+			session.setAttribute(Constants.USER, sess_user);
+		}
 		
 		// step 2, merge the task with the database task
 		sess.merge(mTask);

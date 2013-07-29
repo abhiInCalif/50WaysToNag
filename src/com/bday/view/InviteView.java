@@ -1,5 +1,6 @@
 package com.bday.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.ui.Model;
 
+import com.bday.model.FamilyModel;
 import com.bday.model.InviteModel;
 import com.bday.model.UserModel;
 import com.bday.utils.Constants;
@@ -20,6 +22,8 @@ public class InviteView {
 		Session sess = ViewManager.getCurrentSession();
 		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
 		Transaction tr = sess.beginTransaction();
+		
+		user = (UserModel) sess.merge(user);
 		
 		// safety check
 		if (emails == null) throw new RuntimeException("emails is not a valid list, need to list of emails");
@@ -57,6 +61,51 @@ public class InviteView {
 		// get all the user invites
 		List<InviteModel> invites = user.getInvitations();
 		Constants.toJson(invites, model);
+		tr.commit();
+	}
+
+	public static void accept(HttpSession session, int invite_id, int family_id, Model model) {
+		// step 1, magic incantation
+		Session sess = ViewManager.getCurrentSession();
+		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
+		Transaction tr = sess.beginTransaction();
+		
+		// to accept, we clear family from the user
+		UserModel user = (UserModel) session.getAttribute(Constants.USER);
+		
+		user = (UserModel) sess.merge(user);
+		
+		user.setFamilies(new ArrayList<FamilyModel>());
+		// now add family to the user
+		FamilyModel family = (FamilyModel) sess.get(FamilyModel.class, family_id);
+		user.addFamily(family);
+		
+		family.addMember(user);
+		//remove the invite from the user
+		user.removeInvite(invite_id);
+		
+		// update the model
+		sess.update(user);
+		sess.update(family);
+		
+		Constants.toJson(user.getInvitations(), model);
+		tr.commit();
+	}
+	
+	public static void deny(HttpSession session, int invite_id, int family_id, Model model)
+	{
+		Session sess = ViewManager.getCurrentSession();
+		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
+		Transaction tr = sess.beginTransaction();
+		
+		// just simply remove the invitation
+		UserModel user = (UserModel) session.getAttribute(Constants.USER);
+		user = (UserModel) sess.merge(user);
+		user.removeInvite(invite_id);
+		
+		sess.update(user);
+		
+		Constants.toJson(user.getInvitations(), model);
 		tr.commit();
 	}
 

@@ -17,7 +17,7 @@ public class UserModel
 	private String phoneNumber;
 	private transient List<TaskModel> tasks;
 	private transient List<FamilyModel> families;
-	private List<InviteModel> invitations;
+	private transient List<InviteModel> invitations;
 	
 	public UserModel()
 	{
@@ -159,6 +159,16 @@ public class UserModel
 		tr.commit();
 		
 		return family;
+	}
+
+	public void removeInvite(int inviteId) {
+		// loop through invites remove the one with the same id;
+		for (int i = 0; i < invitations.size(); i++)
+		{
+			InviteModel invite = invitations.get(i);
+			if (invite.getId() == inviteId)
+				invitations.remove(i);
+		}
 	}
 	
 	

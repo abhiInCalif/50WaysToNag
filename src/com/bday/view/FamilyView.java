@@ -35,7 +35,8 @@ public class FamilyView {
 		sess.update(user);
 		
 		// update the session
-		session.setAttribute(Constants.USER, user);
+		if (user.getEmail().equals(((UserModel) session.getAttribute(Constants.USER)).getEmail()))
+			session.setAttribute(Constants.USER, user);
 		
 		// Gson the family object and return it;
 		Constants.toJson(family, model);
@@ -54,6 +55,7 @@ public class FamilyView {
 		Constants.toJson(family, model);
 	}
 	
+	@Deprecated
 	// The session is going to be used to draw the user object from which one can add to
 	// the family object the user;
 	public static void addMemberToHome(int family_id, HttpSession session, Model model) {

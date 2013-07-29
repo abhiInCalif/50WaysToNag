@@ -28,12 +28,12 @@ public class TaskDetailsService {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public String put(@RequestBody String request, @PathVariable int id, Model model)
+	public String put(HttpSession session, @RequestBody String request, @PathVariable int id, Model model)
 	{
 		JsonObject jRequest = Constants.parse(request);
 		String user_email = jRequest.get(Constants.ASSIGNEE).getAsString();
 		TaskModel mTask = Constants.getTaskModelFromRequest(jRequest);
-		TaskDetailsView.put(mTask, id, user_email, model);
+		TaskDetailsView.put(session, mTask, id, user_email, model);
 		return "JSONView";
 	}
 	
