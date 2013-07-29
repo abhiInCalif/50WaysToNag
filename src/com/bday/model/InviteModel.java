@@ -20,7 +20,7 @@ public class InviteModel {
 	{
 		// default
 	}
-	
+
 	/**
 	 * @return the id
 	 */

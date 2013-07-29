@@ -3,6 +3,11 @@ package com.bday.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.bday.view.ViewManager;
+
 public class UserModel 
 {
 	private int id;
@@ -132,6 +137,10 @@ public class UserModel
 
 	public FamilyModel getFirstNotNullFamily() 
 	{
+		Session sess = ViewManager.getCurrentSession();
+		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
+		Transaction tr = sess.beginTransaction();
+		
 		for (int i = 0; i < families.size(); i++)
 		{
 			if (families.get(i) != null)
@@ -140,9 +149,14 @@ public class UserModel
 		
 		// else create a new family, associate it and add it to the
 		// grouping
+		
 		FamilyModel family = new FamilyModel();
 		family.addMember(this);
 		addFamily(family);
+		
+		sess.save(family);
+		sess.update(this);
+		tr.commit();
 		
 		return family;
 	}
