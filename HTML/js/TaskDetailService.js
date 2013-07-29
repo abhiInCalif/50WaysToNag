@@ -30,6 +30,22 @@ var tasksService = app.factory('tasksService', function ($http) {
 						console.log(status);
 						console.log(headers);
 					});
+		},
+		
+		nag: function(task_id, callback)
+		{
+			$http({method: "POST",
+						url: "/Bday/tasks/" + task_id
+						}).success(function(data,status,headers,config)
+						{
+							callback(data);
+						}).error(function(data, status, headers, config)
+						{
+							// some error handling
+							console.log("Network Error occured!");
+							console.log(status);
+							console.log(headers);
+						});
 		}
 	};
 });

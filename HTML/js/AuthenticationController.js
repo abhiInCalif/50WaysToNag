@@ -16,7 +16,7 @@ function AuthenticationController($scope, authService, $location)
       }
       // proceed to issue service call
       $.mobile.showPageLoadingMsg( "b", "Registering...", false);
-      authService.register($scope.username, $scope.password, function(data)
+      authService.register($scope.username, $scope.password, $scope.phone, function(data)
       {
         if (data != -1)
         {

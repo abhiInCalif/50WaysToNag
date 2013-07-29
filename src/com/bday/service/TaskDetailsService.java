@@ -1,5 +1,7 @@
 package com.bday.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,9 +40,9 @@ public class TaskDetailsService {
 	// this will cause a sms to be sent at some point
 	// will depend on the local
 	@RequestMapping(method = RequestMethod.POST)
-	public String nag(int id, Model model)
+	public String nag(HttpSession session, @PathVariable int id, Model model)
 	{
-		TaskDetailsView.nag(id, model);
+		TaskDetailsView.nag(session, id, model);
 		return "JSONView";
 	}
 	

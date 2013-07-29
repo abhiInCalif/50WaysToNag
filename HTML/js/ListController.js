@@ -20,6 +20,14 @@ function ListController($scope, $location, $routeParams, sharedTaskList, familyT
 			$scope.family_id = data;
 		});
 	};
+	
+	$scope.nag = function()
+	{
+		tasksService.nag($routeParams.taskId, function(data)
+		{
+			// no response, perhaps we take them back?
+		});
+	};
 
 	$scope.getUserTasks = function()
 	{

@@ -52,6 +52,7 @@ public class TaskView {
 		
 		// Gson that bitch
 		Constants.toJson(family.getTasks(), model);
+		tr.commit();
 	}
 
 }

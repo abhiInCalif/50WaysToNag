@@ -39,6 +39,7 @@ public class Constants
 	public static final String ASSIGNEE = "assignee";
 	public static final String ID_MESSAGE = "message";
 	public static final String ID_INVITE_RECEIVER = "inviteList";
+	public static final String ID_PHONE = "phone";
 	
 	
 	// public utility functions
