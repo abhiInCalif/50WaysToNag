@@ -2,6 +2,8 @@ package com.bday.view;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.ui.Model;
@@ -38,6 +40,23 @@ public class InviteView {
 		
 		// commit the batched request and push nothing important to the model
 		Constants.toJson(emails, model);
+		tr.commit();
+	}
+
+	public static void getUserInvites(HttpSession session, Model model) {
+		// step 1, magic incantation
+		Session sess = ViewManager.getCurrentSession();
+		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
+		Transaction tr = sess.beginTransaction();
+		
+		// step 2, get the user from the session
+		UserModel user = (UserModel) session.getAttribute(Constants.USER);
+		
+		user = (UserModel) sess.merge(user);
+		
+		// get all the user invites
+		List<InviteModel> invites = user.getInvitations();
+		Constants.toJson(invites, model);
 		tr.commit();
 	}
 

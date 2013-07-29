@@ -34,7 +34,7 @@
 			<generator class="increment"/>
 		</id>
 		
-		<list name="families" table="FamilyMembers" cascade="all" inverse="true">
+		<list name="families" table="FamilyMembers" cascade="all" inverse="true" fetch="join">
 			<key column="UserFamily_id"></key>
 			<list-index column="userfamily_id"></list-index>
 			<many-to-many column="FamilyMember_id" class="com.bday.model.FamilyModel" />

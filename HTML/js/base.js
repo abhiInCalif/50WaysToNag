@@ -10,3 +10,17 @@ var app = angular.module('bday', []).
 			when("/settings", {templateUrl: 'partials/settings.html'}).
 		  when("/login", {templateUrl: 'partials/login.html'});
 }]);
+
+function BaseController($scope, InviteServices)
+{
+	$scope.invites = [];
+	
+	$scope.getInvites = function()
+	{
+		InviteServices.getAllInvites(function(data)
+		{
+			// show all the invites
+			$scope.invites = data;
+		});
+	};
+}

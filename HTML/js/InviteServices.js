@@ -15,6 +15,22 @@ var inviteServices = app.factory('InviteServices', function ($http) {
 							console.log(status);
 							console.log(headers);
 						});
+		},
+		
+		getAllInvitations: function(callback)
+		{
+			$http({method: "GET",
+						url: "/Bday/invite/"
+						}).success(function(data,status,headers,config)
+						{
+							callback(data);
+						}).error(function(data, status, headers, config)
+						{
+							// some error handling
+							console.log("Network Error occured!");
+							console.log(status);
+							console.log(headers);
+						});
 		}
 	};
 });

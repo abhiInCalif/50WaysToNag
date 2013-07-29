@@ -37,4 +37,11 @@ public class InviteService
 		InviteView.invite(user, emails, model);
 		return "JSONView";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String getAllUserInvites(HttpSession session, Model model)
+	{
+		InviteView.getUserInvites(session, model);
+		return "JSONView";
+	}
 }
