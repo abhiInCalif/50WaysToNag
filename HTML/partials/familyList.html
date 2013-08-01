@@ -20,7 +20,19 @@
         </li>
       </ul>
 
-
+    <!-- old checkbox list -->
+    <!--
+    <fieldset data-role="controlgroup">
+      <ul data-filter="true" data-role="listview">
+        <label ng-repeat="task in tasks | orderBy: 'title' | filter:searchTasks">
+          <li>
+          <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}} ({{task.assignee.email}})
+          <a href="/{{task.id}}/edit">Edit</a>
+          </li>
+        </label>
+      </ul>
+    </fieldset>
+    -->
   </div>
 
   <div data-role="footer" data-theme="a" data-position="fixed">

@@ -1,15 +1,3 @@
-<!-- deprecated for now.  use editTask.html instead -->
-
-
-
-
-
-
-
-
-
-
-
 <div ng-controller="ListController" data-role="page" data-theme="c" id="list-details" ng-init="getTaskDetails()">
   <div data-role="header" data-theme="a">
     <a class="thumb" data-rel="back">Cancel</a>
@@ -26,11 +14,11 @@
       <br>
       <label ng-repeat="user in users">
         <label>
-        <input type="radio" ng-model="$parent.$parent.currentTask.assignee" value="{{user.email}}"/>
+        <input type="radio" ng-model="$parent.$parent.currentTask.assignee.email" value="{{user.email}}"/>
         {{user.email}}</label>
       </label>
     </label>
-		<button data-theme="b" ng-click="nag()">Nag</button>
+    <a href="/{{currentTask.id}}/delete" data-role="button" data-rel="dialog" data-transition="pop">Delete Task</a>
   </div>
   <div data-role="footer" data-theme="a" data-position="fixed">
     <h2></h2>

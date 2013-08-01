@@ -84,7 +84,7 @@ function ListController($scope, $location, $routeParams, authService, familyTask
 	  {
 			$location.path("/familyList");
 	  });
-    $scope.updateTask();
+    //$scope.updateTask();
   };
 
   // TODO: need to know which user is currently logged on
