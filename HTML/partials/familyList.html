@@ -9,16 +9,18 @@
   <div data-role="content">
     <!-- debugging header -->
     <h1> FAMILY TASKS </h1>
-    <fieldset data-role="controlgroup">
-      <ul data-filter="true" data-role="listview">
-        <label ng-repeat="task in tasks | orderBy: 'title' | filter:searchTasks">
-          <li>
-          <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}} <!--for debug-->({{task.assignee.email}})
+      <ul data-filter="true" data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="true">
+        <li ng-repeat="task in tasks | orderBy: 'title' | filter:searchTasks">
+          <a>
+            <label>
+              <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}} <!--for debug-->({{task.assignee.email}})
+            </label>
+          </a>
           <a href="/{{task.id}}/edit">Edit</a>
-          </li>
-        </label>
+        </li>
       </ul>
-    </fieldset>
+
+
   </div>
 
   <div data-role="footer" data-theme="a" data-position="fixed">

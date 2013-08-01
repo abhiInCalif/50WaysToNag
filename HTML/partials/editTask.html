@@ -14,7 +14,7 @@
       <br>
       <label ng-repeat="user in users">
         <label>
-        <input type="radio" ng-model="$parent.$parent.currentTask.assignee" value="{{user.email}}"/>
+        <input type="radio" ng-model="$parent.$parent.currentTask.assignee.email" value="{{user.email}}"/>
         {{user.email}}</label>
       </label>
     </label>

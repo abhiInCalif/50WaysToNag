@@ -3,8 +3,8 @@ function InvitationsController($scope, InviteServices)
 	$scope.invite = function()
 	{
 		var emails = $scope.invite_emails.split(",");
-		debugger;
-		
+		//debugger;
+
 		InviteServices.invite(emails, function(data)
 		{
 			// console.log the response

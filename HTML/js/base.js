@@ -21,6 +21,7 @@ function BaseController($scope, InviteServices)
 	{
 		InviteServices.getAllInvitations(function(data)
 		{
+    console.log(data);
 			// show all the invites
 			$scope.invites = data;
 		});
