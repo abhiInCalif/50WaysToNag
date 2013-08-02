@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.ui.Model;
 
+import com.bday.manager.FamilyManager;
 import com.bday.model.FamilyModel;
 import com.bday.model.TaskModel;
 import com.bday.model.UserModel;
@@ -88,7 +89,7 @@ public class FamilyView {
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
 		user = (UserModel) sess.merge(user);
 		
-		FamilyModel family = user.getFirstNotNullFamily();
+		FamilyModel family = FamilyManager.findFirstNotNullFamily(user);
 		sess.saveOrUpdate(family);
 		
 		Constants.toJson(family.getMembers(), model);

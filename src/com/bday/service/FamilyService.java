@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bday.manager.FamilyManager;
 import com.bday.model.FamilyModel;
 import com.bday.model.TaskModel;
 import com.bday.model.UserModel;
@@ -44,7 +45,7 @@ public class FamilyService
 		TaskModel mTask = new TaskModel(title, description, nagStatus, isCompleted);
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
 		// defaults to the first family that the user is a part of
-		int family_id = user.getFirstNotNullFamily().getId();
+		int family_id = FamilyManager.findFirstNotNullFamily(user).getId();
 
 		// issue the request
 		FamilyView.postTask(session, mTask, family_id, user_email, model);
@@ -55,31 +56,11 @@ public class FamilyService
 	public String getAllTasks(HttpSession session, Model model)
 	{
 		// hack around, needs to be refactored properlly
-		// gets all the tasks for the given family
-		Session sess = ViewManager.getCurrentSession();
-		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
-		Transaction tr = sess.beginTransaction();
 		
 		// retrieve session object and get the family id (0)
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
-		user = (UserModel) sess.merge(user);
 		
-		FamilyModel family = user.getFirstNotNullFamily();
-		
-		if (family == null)
-		{
-			// create a new family
-			// else create a new family, associate it and add it to the
-			// grouping
-			
-			family = new FamilyModel();
-			family.addMember(user);
-			user.addFamily(family);
-			
-			sess.save(family);
-			sess.update(user);
-			tr.commit();
-		}
+		FamilyModel family = FamilyManager.findFirstNotNullFamily(user);
 		
 		int id = family.getId();
 		// issue request
