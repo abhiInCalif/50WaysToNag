@@ -53,12 +53,12 @@
 			<column name="Password"></column>
 		</property>
 		
-		<list name="invitations" table="UserFamiliesInvited" cascade="all" inverse="false">
+		<list name="invitations" table="UserFamiliesInvited" cascade="all" inverse="false" lazy="false">
 			<key column="UserInvited"></key>
 			<list-index column="invited_id"></list-index>
 			<one-to-many class="com.bday.model.InviteModel"></one-to-many>
 		</list>
-		<list name="tasks" table="UserTasks" cascade="all" inverse="false">
+		<list name="tasks" table="UserTasks" cascade="all" inverse="false" lazy="false">
 			<key column="UserTaskID"></key>
 			<list-index column="usertask_id"></list-index>
 			<one-to-many class="com.bday.model.TaskModel"></one-to-many>

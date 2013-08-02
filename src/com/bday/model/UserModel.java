@@ -13,7 +13,7 @@ public class UserModel
 	private int id;
 	private String email;
 	private String name;
-	private String password;
+	private transient String password;
 	private String phoneNumber;
 	private transient List<TaskModel> tasks;
 	private transient List<FamilyModel> families;
@@ -141,6 +141,8 @@ public class UserModel
 		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
 		Transaction tr = sess.beginTransaction();
 		
+		this.families = ((UserModel) sess.get(UserModel.class, this.id)).getFamilies();
+		
 		for (int i = 0; i < families.size(); i++)
 		{
 			if (families.get(i) != null)
@@ -168,6 +170,16 @@ public class UserModel
 			InviteModel invite = invitations.get(i);
 			if (invite.getId() == inviteId)
 				invitations.remove(i);
+		}
+	}
+
+	public void removeTask(int taskId) {
+		// loop through tasks remove the one with the same id;
+		for (int i = 0; i < tasks.size(); i++)
+		{
+			TaskModel task = tasks.get(i);
+			if (task.getId() == taskId)
+				tasks.remove(i);
 		}
 	}
 	

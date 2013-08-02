@@ -54,21 +54,23 @@ public class TaskDetailsView {
 		Transaction tr = sess.beginTransaction();
 		
 		// step 1, set the assignee from the email
-		UserModel user = (UserModel) sess.createQuery("from UserModel as user where user.email=?").setString(0, user_email).list().get(0);
-		if(user == null) return; // error occured;
+		UserModel toBeAssigned = (UserModel) sess.createQuery("from UserModel as user where user.email=?").setString(0, user_email).list().get(0);
+		if(toBeAssigned == null) return; // error occured;
 		
-		mTask.setId(id);
-		mTask.setAssignee(user);
+		TaskModel oldTask = (TaskModel) sess.get(TaskModel.class, id);
 		
-		UserModel sess_user = (UserModel) session.getAttribute(Constants.USER);
-		if(user.getEmail().equals(sess_user.getEmail()))
-		{
-			sess_user.addTask(mTask);
-			session.setAttribute(Constants.USER, sess_user);
-		}
+		// first get the old assignee, and remove it from him.
+		UserModel assignee = oldTask.getAssignee();
+		assignee.removeTask(oldTask.getId());
 		
-		// step 2, merge the task with the database task
+		// now assign task to new guy
+		mTask.setId(oldTask.getId());
+		mTask.setAssignee(toBeAssigned);
+		toBeAssigned.addTask(mTask);
+		
 		sess.merge(mTask);
+		sess.update(toBeAssigned);
+		sess.update(assignee);
 		
 		Type taskType = new TypeToken<TaskModel>() {}.getType();
 		Constants.toJson(mTask, taskType, model);

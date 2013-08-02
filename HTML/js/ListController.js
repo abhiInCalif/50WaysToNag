@@ -68,9 +68,6 @@ function ListController($scope, $location, $routeParams, authService, familyTask
 	};
 
   $scope.updateTask = function() {
-    // current way of converting current task to meet backend api.
-    // your backend get and put requests need to expect the same data -- right now, the get
-    // request assignee is different from that of the put request
     $scope.currentTask.assignee = $scope.currentTask.assignee.email;
 		tasksService.editDetails($scope.currentTask.id, $scope.currentTask, function(data)
 		{

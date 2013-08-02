@@ -63,7 +63,6 @@ public class AuthenticationService
 	public String logout(HttpSession session)
 	{
 		session.invalidate();
-		session.setAttribute(Constants.USER, "");
 		return "JSONView";
 	}
 	

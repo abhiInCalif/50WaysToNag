@@ -30,7 +30,7 @@ public class TaskView {
 		
 		// step two, use the id of the user to query for an updated
 		// userObject
-		UserModel user = (UserModel) sess.merge(session_user);
+		UserModel user = (UserModel) sess.get(UserModel.class, session_user.getId());
 		
 		// step three retrieve all the tasks from the user object
 		List<TaskModel> tasks = user.getTasks();
