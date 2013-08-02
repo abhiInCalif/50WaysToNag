@@ -149,18 +149,7 @@ public class UserModel
 				return families.get(i);
 		}
 		
-		// else create a new family, associate it and add it to the
-		// grouping
-		
-		FamilyModel family = new FamilyModel();
-		family.addMember(this);
-		addFamily(family);
-		
-		sess.save(family);
-		sess.update(this);
-		tr.commit();
-		
-		return family;
+		return null;
 	}
 
 	public void removeInvite(int inviteId) {
