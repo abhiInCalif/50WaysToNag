@@ -54,9 +54,7 @@ public class FamilyService
 
 	@RequestMapping(value = "/task", method = RequestMethod.GET)
 	public String getAllTasks(HttpSession session, Model model)
-	{
-		// hack around, needs to be refactored properlly
-		
+	{		
 		// retrieve session object and get the family id (0)
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
 		

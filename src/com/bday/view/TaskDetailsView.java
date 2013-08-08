@@ -53,22 +53,24 @@ public class TaskDetailsView {
 		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
 		Transaction tr = sess.beginTransaction();
 		
-		// step 1, set the assignee from the email
-		UserModel toBeAssigned = (UserModel) sess.createQuery("from UserModel as user where user.email=?").setString(0, user_email).list().get(0);
-		if(toBeAssigned == null) return; // error occured;
-		
 		TaskModel oldTask = (TaskModel) sess.get(TaskModel.class, id);
 		
 		// first get the old assignee, and remove it from him.
 		UserModel assignee = oldTask.getAssignee();
 		assignee.removeTask(oldTask.getId());
 		
+		// step 1, set the assignee from the email
+		UserModel toBeAssigned = (UserModel) sess.createQuery("from UserModel as user where user.email=?").setString(0, user_email).list().get(0);
+		if(toBeAssigned == null) return; // error occured;
+		
 		// now assign task to new guy
 		mTask.setId(oldTask.getId());
 		mTask.setAssignee(toBeAssigned);
 		toBeAssigned.addTask(mTask);
+		oldTask = mTask;
 		
-		sess.merge(mTask);
+		oldTask = (TaskModel) sess.merge(oldTask);
+		sess.update(oldTask);
 		sess.update(toBeAssigned);
 		sess.update(assignee);
 		

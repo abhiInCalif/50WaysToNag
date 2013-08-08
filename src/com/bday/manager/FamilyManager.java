@@ -17,7 +17,7 @@ public class FamilyManager
 		Transaction tr = sess.beginTransaction();
 		
 		// ensure its in the session, no guarantees remember
-		user = (UserModel) sess.merge(user);
+		user = (UserModel) sess.get(UserModel.class, user.getId());
 		FamilyModel family = user.getFirstNotNullFamily();
 		
 		if (family == null)
@@ -32,7 +32,6 @@ public class FamilyManager
 			
 			sess.save(family);
 			sess.update(user);
-			tr.commit();
 		}
 		
 		return family;

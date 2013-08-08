@@ -38,7 +38,7 @@ public class InviteView {
 			if (users.size() == 0)
 			{
 				// we need to send out an invite to this user....
-				EmailManager emailManager = new EmailManager(email, "Hi! Your friend has invited you to join 50waystonag.com. To sign up just click <a href=\"http://50waystonag.com\">here</a>", "Sign up for 50ways");
+				EmailManager emailManager = new EmailManager(email, "Hi! Your friend has invited you to join 50waystonag.com. http://50waystonag.com", "Sign up for 50ways");
 				emailManager.sendEmail();
 			}
 			else
