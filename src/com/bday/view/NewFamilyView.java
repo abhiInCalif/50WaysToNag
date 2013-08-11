@@ -33,7 +33,7 @@ public class NewFamilyView {
 			// step 4, save it all
 			id = (Integer) sess.save(new_family);
 			
-			user.addFamily(new_family);
+			user.setFamily(new_family);
 			sess.update(user);
 			
 		}

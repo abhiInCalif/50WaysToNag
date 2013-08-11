@@ -7,33 +7,18 @@ import com.bday.model.FamilyModel;
 import com.bday.model.UserModel;
 import com.bday.view.ViewManager;
 
-public class FamilyManager 
-{
-	public static FamilyModel findFirstNotNullFamily(UserModel user)
+public class FamilyManager {
+	
+	public static FamilyModel getFamilyForUser(UserModel user)
 	{
-		// gets all the tasks for the given family
+		// step 1, magic incantation
 		Session sess = ViewManager.getCurrentSession();
 		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
 		Transaction tr = sess.beginTransaction();
 		
-		// ensure its in the session, no guarantees remember
-		user = (UserModel) sess.get(UserModel.class, user.getId());
-		FamilyModel family = user.getFirstNotNullFamily();
+		UserModel user_db = (UserModel) sess.get(UserModel.class, user.getId());
 		
-		if (family == null)
-		{
-			// create a new family
-			// else create a new family, associate it and add it to the
-			// grouping
-			
-			family = new FamilyModel();
-			family.addMember(user);
-			user.addFamily(family);
-			
-			sess.save(family);
-			sess.update(user);
-		}
-		
-		return family;
+		return user_db.getFamily();
 	}
+
 }

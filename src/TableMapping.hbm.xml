@@ -9,11 +9,11 @@
 			<generator class="increment"/>
 		</id>
 		
-		<list name="members" table="FamilyMembers" inverse="false"
+		<list name="members" table="FamilyMembers"
 			cascade="all">
-			<key column="FamilyMember_id" />
+			<key column="FamilyID" />
 			<list-index column="fmid" />
-			<many-to-many column="UserFamily_id" class="com.bday.model.UserModel" />
+			<one-to-many class="com.bday.model.UserModel" />
 		</list>
 		
 		<list name="tasks" table="FamilyTasks" inverse="false"
@@ -34,11 +34,9 @@
 			<generator class="increment"/>
 		</id>
 		
-		<list name="families" table="FamilyMembers" cascade="all" inverse="true" lazy="false">
-			<key column="UserFamily_id"></key>
-			<list-index column="userfamily_id"></list-index>
-			<many-to-many column="FamilyMember_id" class="com.bday.model.FamilyModel" />
-		</list>
+		<many-to-one name="family" class="com.bday.model.FamilyModel" cascade="all">
+			<column name="FamilyID" not-null="true"></column>
+		</many-to-one>
 		
 		<property name="email" type="string">
 			<column name="Email"></column>
@@ -53,8 +51,8 @@
 			<column name="Password"></column>
 		</property>
 		
-		<list name="invitations" table="UserFamiliesInvited" cascade="all" inverse="false" lazy="false">
-			<key column="UserInvited"></key>
+		<list name="invitations" table="UserFamiliesInvited" cascade="all" lazy="false">
+			<key column="UserID"></key>
 			<list-index column="invited_id"></list-index>
 			<one-to-many class="com.bday.model.InviteModel"></one-to-many>
 		</list>
@@ -103,8 +101,8 @@
 			<column name="Message"></column>
 		</property>
 		
-		<one-to-one name="asker" class="com.bday.model.UserModel" cascade="all"></one-to-one>
-		<one-to-one name="family" class="com.bday.model.FamilyModel" cascade="all"></one-to-one>
+		<many-to-one name="asker" class="com.bday.model.UserModel" cascade="all" column="UserID"></many-to-one>
+		<many-to-one name="family" class="com.bday.model.FamilyModel" cascade="all" unique="true" column="Invitation_Family"></many-to-one>
 		
 	</class>
 	

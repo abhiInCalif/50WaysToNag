@@ -16,13 +16,12 @@ public class UserModel
 	private transient String password;
 	private String phoneNumber;
 	private transient List<TaskModel> tasks;
-	private transient List<FamilyModel> families;
+	private transient FamilyModel family;
 	private transient List<InviteModel> invitations;
 	
 	public UserModel()
 	{
 		this.tasks = new ArrayList<TaskModel>();
-		this.families = new ArrayList<FamilyModel>();
 		this.invitations = new ArrayList<InviteModel>();
 	}
 	
@@ -101,14 +100,14 @@ public class UserModel
 	/**
 	 * @return the families
 	 */
-	public List<FamilyModel> getFamilies() {
-		return families;
+	public FamilyModel getFamily() {
+		return family;
 	}
 	/**
 	 * @param families the families to set
 	 */
-	public void setFamilies(List<FamilyModel> families) {
-		this.families = families;
+	public void setFamily(FamilyModel families) {
+		this.family = families;
 	}
 	/**
 	 * @return the invitations
@@ -123,33 +122,12 @@ public class UserModel
 		this.invitations = invitations;
 	}
 	
-	public void addFamily(FamilyModel newFamily) {
-		this.families.add(newFamily);
-	}
-	
 	public void addTask(TaskModel mTask) {
 		this.tasks.add(mTask);
 	}
 
 	public void addInvite(InviteModel mInvite) {
 		this.invitations.add(mInvite);
-	}
-
-	public FamilyModel getFirstNotNullFamily() 
-	{
-		Session sess = ViewManager.getCurrentSession();
-		if (!sess.isOpen()) sess = ViewManager.openSession(); // safety check
-		Transaction tr = sess.beginTransaction();
-		
-		this.families = ((UserModel) sess.get(UserModel.class, this.id)).getFamilies();
-		
-		for (int i = 0; i < families.size(); i++)
-		{
-			if (families.get(i) != null)
-				return families.get(i);
-		}
-		
-		return null;
 	}
 
 	public void removeInvite(int inviteId) {

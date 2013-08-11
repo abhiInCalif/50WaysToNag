@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import org.springframework.ui.Model;
 
 import com.google.gson.Gson;
+import com.bday.model.FamilyModel;
 import com.bday.model.UserModel;
 import com.bday.utils.Constants;
 import com.bday.utils.Logger;
@@ -33,8 +34,12 @@ public class AuthenticationView
 				user.setEmail(email);
 				user.setPassword(password);
 				user.setPhoneNumber(phoneNumber);
+				FamilyModel family = new FamilyModel();
+				user.setFamily(family);
+				family.addMember(user);
 				
 				int id = (Integer) sess.save(user);
+				sess.save(family);
 				sess.flush();
 				tr.commit();
 				

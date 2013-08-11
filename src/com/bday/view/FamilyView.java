@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.ui.Model;
 
-import com.bday.manager.FamilyManager;
 import com.bday.model.FamilyModel;
 import com.bday.model.TaskModel;
 import com.bday.model.UserModel;
@@ -69,7 +68,7 @@ public class FamilyView {
 		
 		// Step 2, get the user from the session;
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
-		user.addFamily(family);
+		user.setFamily(family);
 		user = (UserModel) sess.merge(user);
 		
 		// add the user to the family and save
@@ -87,9 +86,9 @@ public class FamilyView {
 		Transaction tr = sess.beginTransaction();
 		
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
-		user = (UserModel) sess.merge(user);
+		user = (UserModel) sess.get(UserModel.class, user.getId());
 		
-		FamilyModel family = FamilyManager.findFirstNotNullFamily(user);
+		FamilyModel family = user.getFamily();
 		sess.saveOrUpdate(family);
 		
 		Constants.toJson(family.getMembers(), model);

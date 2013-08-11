@@ -10,7 +10,6 @@ import org.hibernate.Transaction;
 import org.springframework.ui.Model;
 
 import com.bday.manager.EmailManager;
-import com.bday.manager.FamilyManager;
 import com.bday.model.FamilyModel;
 import com.bday.model.InviteModel;
 import com.bday.model.UserModel;
@@ -45,10 +44,9 @@ public class InviteView {
 			{
 				UserModel invitee = (UserModel) users.get(0);
 				// add the invitation to the user;
-				InviteModel invite = new InviteModel(asking_user, FamilyManager.findFirstNotNullFamily(asking_user), Constants.INVITE_MESSAGE);
+				InviteModel invite = new InviteModel(asking_user, asking_user.getFamily(), Constants.INVITE_MESSAGE);
 				invitee.addInvite(invite);
 				
-				sess.save(invite);
 				sess.update(invitee);
 			}
 		}
@@ -84,13 +82,11 @@ public class InviteView {
 		UserModel user = (UserModel) session.getAttribute(Constants.USER);
 		user = (UserModel) sess.get(UserModel.class, user.getId());
 		
-		user.setFamilies(new ArrayList<FamilyModel>());
 		// now add family to the user
 		FamilyModel family = (FamilyModel) sess.get(FamilyModel.class, family_id);
-		user.addFamily(family);
 		
 		family.addMember(user);
-		//remove the invite from the user
+		user.setFamily(family);
 		user.removeInvite(invite_id);
 		
 		// update the model
