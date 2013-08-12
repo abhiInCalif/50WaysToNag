@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import com.bday.manager.EmailManager;
 import com.bday.manager.InsultManager;
+import com.bday.manager.VoiceManager;
 import com.bday.model.TaskModel;
 import com.bday.model.UserModel;
 import com.bday.utils.Constants;
@@ -31,12 +32,16 @@ public class TaskDetailsView {
 		
 		// send the message
 		String message = InsultManager.indianInsults[nagLevel % InsultManager.indianInsults.length];
+		message += "<br /> And the task to complete is: ";
+		message += "<b>" + task.getTitle() + "</b>";
+		message += "<br /> And the details are: ";
+		message += "<b>" + task.getDetails() + "</b>";
 		EmailManager email = new EmailManager(user.getEmail(), message, EmailManager.SUBJECT);
 		email.sendEmail();
 		String phone = user.getPhoneNumber();
 		phone = phone.replaceAll("-", "");
-		email = new EmailManager(phone, message, EmailManager.SUBJECT); 
-		email.sendEmail();
+		VoiceManager v = new VoiceManager();
+		v.sendSMS(phone, message);
 		
 		Constants.toJson(task, model);
 		tr.commit();

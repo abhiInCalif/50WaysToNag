@@ -56,7 +56,7 @@ public class EmailManager {
 			message.setFrom(new InternetAddress(USERNAME));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(this.to));
 			message.setSubject(this.subject);
-			message.setText(this.message);
+			message.setContent(this.message, "text/html");
  
 			Transport.send(message);
  
