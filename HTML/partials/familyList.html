@@ -11,12 +11,9 @@
     <h1> FAMILY TASKS </h1>
       <ul data-filter="true" data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="true">
         <li ng-repeat="task in tasks | orderBy: 'title' | filter:searchTasks">
-          <a>
-            <label>
-              <input type="checkbox" name="task-id" ng-model="task.isCompleted" /> {{task.title}} <!--for debug-->({{task.assignee.email}})
-            </label>
+          <a href="/{{task.id}}/edit">
+              {{task.title}} <!--for debug-->({{task.assignee.email}})
           </a>
-          <a href="/{{task.id}}/edit">Edit</a>
         </li>
       </ul>
 
